@@ -2,36 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
     <title>Edward Sam - UGRC 150 & 110 Question Bank</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
         /* ============================================================
-           ROOT VARIABLES - PREMIUM COLOR PALETTE
+           ROOT VARIABLES - SAKAI INSPIRED
            ============================================================ */
         :root {
             --primary: #0A1628;
             --primary-light: #1A3A6B;
             --primary-dark: #060E1A;
-            --gold: #D4AF37;
-            --gold-light: #F0D060;
-            --gold-dark: #B8962A;
+            --sakai-blue: #12639B;
+            --sakai-green: #3A833A;
+            --sakai-gold: #D4AF37;
+            --sakai-gold-light: #F0D060;
             --emerald: #2ECC71;
             --amber: #F39C12;
             --ruby: #E74C3C;
-            --bg: #F5F6FA;
+            --bg: #EFF3F8;
             --card: #FFFFFF;
             --text: #1A1A2E;
             --text-light: #6B7280;
-            --shadow: 0 20px 60px rgba(10, 22, 40, 0.15);
-            --shadow-hover: 0 30px 80px rgba(10, 22, 40, 0.25);
-            --radius: 20px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.12);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --transition: all 0.3s ease;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         /* ============================================================
-           RESET & BASE
+           RESET & BASE - FULL SCREEN FIX
            ============================================================ */
         * {
             margin: 0;
@@ -40,15 +42,22 @@
             font-family: var(--font);
         }
 
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             background: var(--bg);
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 20px;
-            background-image: radial-gradient(ellipse at 10% 20%, rgba(10, 22, 40, 0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 90% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+            align-items: flex-start;
+            padding: 16px;
+            background-image: radial-gradient(ellipse at 10% 20%, rgba(10, 22, 40, 0.02) 0%, transparent 60%),
+                radial-gradient(ellipse at 90% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 60%);
         }
 
         /* ============================================================
@@ -59,8 +68,8 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            right: 0;
+            bottom: 0;
             background: rgba(10, 22, 40, 0.85);
             z-index: 9999;
             justify-content: center;
@@ -68,15 +77,17 @@
             flex-direction: column;
             color: #fff;
             backdrop-filter: blur(8px);
+            padding: 20px;
+            text-align: center;
         }
         #loadingOverlay.active {
             display: flex;
         }
         #loadingOverlay .spinner {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top-color: var(--gold);
+            border-top-color: var(--sakai-gold);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -86,23 +97,23 @@
             }
         }
         #loadingOverlay .logo-text {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
-            margin-top: 20px;
-            letter-spacing: 1px;
+            margin-top: 18px;
+            letter-spacing: 0.5px;
         }
         #loadingOverlay .logo-text span {
-            color: var(--gold);
+            color: var(--sakai-gold);
         }
         #loadingOverlay p {
-            margin-top: 8px;
+            margin-top: 6px;
             font-size: 14px;
             opacity: 0.7;
             font-weight: 300;
         }
         #loadingOverlay .progress-bar {
-            margin-top: 16px;
-            width: 280px;
+            margin-top: 14px;
+            width: 260px;
             max-width: 80%;
             height: 4px;
             background: rgba(255, 255, 255, 0.1);
@@ -111,26 +122,28 @@
         }
         #loadingOverlay .progress-bar .fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            background: linear-gradient(90deg, var(--sakai-gold), var(--sakai-gold-light));
             border-radius: 10px;
             transition: width 0.5s;
             width: 0%;
         }
 
         /* ============================================================
-           LOGIN SCREEN - PREMIUM
+           LOGIN SCREEN - SAKAI STYLE
            ============================================================ */
         #loginScreen {
             width: 100%;
             max-width: 460px;
             background: var(--card);
-            border-radius: var(--radius);
+            border-radius: var(--radius-lg);
             box-shadow: var(--shadow);
-            padding: 48px 36px 40px;
+            padding: 36px 28px 32px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: auto;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            flex-shrink: 0;
         }
 
         #loginScreen::before {
@@ -140,24 +153,24 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--gold), var(--primary-light));
+            background: linear-gradient(90deg, var(--sakai-blue), var(--sakai-gold), var(--sakai-blue));
         }
 
         #loginScreen .crest {
-            font-size: 32px;
-            margin-bottom: 4px;
+            font-size: 36px;
+            margin-bottom: 2px;
         }
 
         #loginScreen .logo-badge {
-            font-size: 13px;
+            font-size: 12px;
             letter-spacing: 2px;
-            color: var(--primary-light);
-            font-weight: 600;
+            color: var(--sakai-blue);
+            font-weight: 700;
             text-transform: uppercase;
         }
 
         #loginScreen .uni-name {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
             color: var(--primary);
             margin-bottom: 2px;
@@ -165,7 +178,7 @@
         }
 
         #loginScreen .uni-name span {
-            color: var(--gold);
+            color: var(--sakai-gold);
         }
 
         #loginScreen .sub-title {
@@ -176,20 +189,20 @@
         }
 
         #loginScreen .brand-divider {
-            width: 60px;
+            width: 50px;
             height: 3px;
-            background: linear-gradient(90deg, var(--gold), var(--gold-light));
-            margin: 12px auto 18px;
+            background: linear-gradient(90deg, var(--sakai-gold), var(--sakai-gold-light));
+            margin: 10px auto 16px;
             border-radius: 10px;
         }
 
         #loginScreen .tagline {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: #fff;
-            padding: 16px 20px;
-            border-radius: 12px;
-            margin-bottom: 28px;
-            box-shadow: 0 8px 30px rgba(10, 22, 40, 0.2);
+            padding: 14px 18px;
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(10, 22, 40, 0.15);
             position: relative;
             overflow: hidden;
         }
@@ -197,30 +210,30 @@
         #loginScreen .tagline::after {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 150px;
-            height: 150px;
-            background: rgba(212, 175, 55, 0.08);
+            top: -40%;
+            right: -15%;
+            width: 120px;
+            height: 120px;
+            background: rgba(212, 175, 55, 0.06);
             border-radius: 50%;
         }
 
         #loginScreen .tagline .main {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             position: relative;
             z-index: 1;
         }
 
         #loginScreen .tagline .main span {
-            color: var(--gold-light);
+            color: var(--sakai-gold-light);
         }
 
         #loginScreen .tagline .motto {
             display: block;
             font-weight: 300;
-            font-size: 13px;
+            font-size: 12px;
             opacity: 0.85;
             margin-top: 4px;
             letter-spacing: 2px;
@@ -230,7 +243,7 @@
 
         .input-group {
             text-align: left;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .input-group label {
@@ -247,19 +260,19 @@
 
         .input-group input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 12px 14px;
             border: 2px solid #E5E7EB;
-            border-radius: 12px;
+            border-radius: var(--radius);
             font-size: 15px;
             transition: var(--transition);
             background: #FAFBFC;
         }
 
         .input-group input:focus {
-            border-color: var(--primary-light);
+            border-color: var(--sakai-blue);
             outline: none;
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(26, 58, 107, 0.08);
+            box-shadow: 0 0 0 4px rgba(18, 99, 155, 0.08);
         }
 
         .input-group .error-msg {
@@ -274,8 +287,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 4px 0 20px;
+            margin: 4px 0 18px;
             font-size: 13px;
+            flex-wrap: wrap;
+            gap: 6px;
         }
 
         .login-options label {
@@ -287,14 +302,14 @@
         }
 
         .login-options label input[type="checkbox"] {
-            accent-color: var(--primary-light);
+            accent-color: var(--sakai-blue);
             width: 16px;
             height: 16px;
             cursor: pointer;
         }
 
         .login-options a {
-            color: var(--primary-light);
+            color: var(--sakai-blue);
             text-decoration: none;
             font-weight: 500;
         }
@@ -306,15 +321,15 @@
         #loginBtn {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: linear-gradient(135deg, var(--sakai-blue), var(--primary-light));
             color: #fff;
             border: none;
-            border-radius: 12px;
+            border-radius: var(--radius);
             font-size: 17px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 4px 20px rgba(10, 22, 40, 0.25);
+            box-shadow: 0 4px 16px rgba(18, 99, 155, 0.2);
             position: relative;
             overflow: hidden;
         }
@@ -326,7 +341,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.06), transparent);
             transform: rotate(45deg);
             transition: 0.6s;
         }
@@ -337,7 +352,7 @@
 
         #loginBtn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(10, 22, 40, 0.35);
+            box-shadow: 0 6px 24px rgba(18, 99, 155, 0.3);
         }
 
         #loginBtn:active {
@@ -345,19 +360,43 @@
         }
 
         .login-footer-text {
-            margin-top: 18px;
+            margin-top: 16px;
             font-size: 12px;
             color: var(--text-light);
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
 
         .login-footer-text span {
-            color: var(--gold-dark);
+            color: var(--sakai-gold-dark);
             font-weight: 600;
         }
 
+        .login-footer-text .channel-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--sakai-blue);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            margin-top: 4px;
+            padding: 4px 12px;
+            background: #E8F0FE;
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+
+        .login-footer-text .channel-link:hover {
+            background: #D1E3FF;
+            transform: scale(1.02);
+        }
+
         /* ============================================================
-           APP CONTAINER
+           APP CONTAINER - FULL WIDTH
            ============================================================ */
         #appContainer {
             display: none;
@@ -367,16 +406,16 @@
         }
 
         /* ============================================================
-           TOP HEADER - PREMIUM
+           TOP HEADER - SAKAI STYLE
            ============================================================ */
         .top-header {
             background: var(--card);
-            padding: 12px 28px;
+            padding: 12px 24px;
             border-radius: var(--radius) var(--radius) 0 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
             flex-wrap: wrap;
             gap: 8px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
@@ -385,15 +424,15 @@
         .top-header .brand {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
 
         .top-header .brand .logo-icon {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
             color: var(--primary);
             letter-spacing: -0.5px;
-            background: linear-gradient(135deg, var(--primary), var(--gold-dark));
+            background: linear-gradient(135deg, var(--primary), var(--sakai-gold-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -401,25 +440,25 @@
         .top-header .brand .brand-text .main-title {
             font-weight: 700;
             color: var(--primary);
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.2;
         }
 
         .top-header .brand .brand-text .main-title span {
-            color: var(--gold-dark);
+            color: var(--sakai-gold-dark);
         }
 
         .top-header .brand .brand-text .sub-title {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-light);
             font-weight: 400;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
         }
 
         .top-header .user-area {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 14px;
         }
 
         .top-header .user-area .bell {
@@ -451,18 +490,18 @@
         }
 
         .top-header .user-area .avatar {
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: linear-gradient(135deg, var(--sakai-blue), var(--primary-light));
             color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
-            box-shadow: 0 2px 10px rgba(10, 22, 40, 0.15);
+            box-shadow: 0 2px 8px rgba(18, 99, 155, 0.15);
             transition: var(--transition);
         }
 
@@ -471,31 +510,31 @@
         }
 
         /* ============================================================
-           TIMER BANNER - PREMIUM
+           TIMER BANNER - SAKAI STYLE
            ============================================================ */
         .timer-banner {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            padding: 10px 28px;
+            background: linear-gradient(135deg, var(--sakai-blue), var(--primary-light));
+            padding: 10px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
-            border-bottom: 2px solid var(--gold);
+            gap: 6px;
+            border-bottom: 2px solid var(--sakai-gold);
         }
 
         .timer-banner .timer-text {
             color: #fff;
             font-weight: 700;
-            font-size: 20px;
-            letter-spacing: 0.5px;
+            font-size: 18px;
+            letter-spacing: 0.3px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .timer-banner .timer-text .timer-icon {
-            font-size: 22px;
+            font-size: 20px;
         }
 
         .timer-banner .timer-toggle {
@@ -527,11 +566,11 @@
         }
 
         /* ============================================================
-           DASHBOARD - PREMIUM
+           DASHBOARD - SAKAI STYLE
            ============================================================ */
         #dashboard {
             background: var(--card);
-            padding: 28px 32px 36px;
+            padding: 24px 28px 32px;
             border-radius: 0 0 var(--radius) var(--radius);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
         }
@@ -541,80 +580,81 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 8px;
+            gap: 10px;
+            margin-bottom: 6px;
         }
 
         #dashboard .welcome-row .greeting {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         #dashboard .welcome-row .greeting .wave {
-            font-size: 32px;
+            font-size: 28px;
         }
 
         #dashboard .welcome-row .greeting h2 {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--primary);
         }
 
         #dashboard .welcome-row .greeting h2 span {
-            color: var(--gold-dark);
+            color: var(--sakai-gold-dark);
         }
 
         #dashboard .welcome-row .index-badge {
             background: #F0F2F5;
-            padding: 6px 18px;
+            padding: 4px 16px;
             border-radius: 30px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
-            color: var(--primary-light);
+            color: var(--sakai-blue);
             border: 1px solid #E5E7EB;
+            white-space: nowrap;
         }
 
         #dashboard .stats-row {
             display: flex;
-            gap: 20px;
+            gap: 16px;
             flex-wrap: wrap;
-            margin: 16px 0 24px;
-            padding: 16px 20px;
+            margin: 12px 0 20px;
+            padding: 12px 16px;
             background: #F8FAFC;
-            border-radius: 12px;
+            border-radius: var(--radius);
             border: 1px solid #E5E7EB;
         }
 
         #dashboard .stats-row .stat-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 14px;
+            gap: 6px;
+            font-size: 13px;
             color: var(--text-light);
         }
 
         #dashboard .stats-row .stat-item .num {
             font-weight: 700;
             color: var(--primary);
-            font-size: 18px;
+            font-size: 17px;
         }
 
         #dashboard .stats-row .stat-item .num.gold {
-            color: var(--gold-dark);
+            color: var(--sakai-gold-dark);
         }
 
         #dashboard .stats-row .stat-item .num.green {
-            color: var(--emerald);
+            color: var(--sakai-green);
         }
 
         #dashboard .motivational {
             background: linear-gradient(135deg, #FEF9E7, #FDEBD0);
-            padding: 12px 18px;
-            border-radius: 12px;
-            border-left: 4px solid var(--gold);
-            margin-bottom: 24px;
-            font-size: 14px;
+            padding: 10px 16px;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--sakai-gold);
+            margin-bottom: 20px;
+            font-size: 13px;
             color: #7D6608;
             font-style: italic;
         }
@@ -628,14 +668,14 @@
         .course-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            gap: 20px;
             margin-top: 4px;
         }
 
         .course-card {
             background: #F8FAFC;
-            border-radius: 16px;
-            padding: 24px 28px 28px;
+            border-radius: var(--radius);
+            padding: 20px 22px 22px;
             border: 2px solid #E5E7EB;
             cursor: pointer;
             transition: var(--transition);
@@ -654,7 +694,7 @@
         }
 
         .course-card.ct::before {
-            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            background: linear-gradient(90deg, var(--sakai-blue), var(--primary-light));
         }
 
         .course-card.aw::before {
@@ -664,25 +704,25 @@
         .course-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-hover);
-            border-color: var(--primary-light);
+            border-color: var(--sakai-blue);
         }
 
         .course-card .card-icon {
-            font-size: 32px;
-            margin-bottom: 4px;
+            font-size: 28px;
+            margin-bottom: 2px;
         }
 
         .course-card .card-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 2px;
         }
 
         .course-card .card-desc {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-light);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .course-card .card-footer {
@@ -690,26 +730,26 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
 
         .course-card .card-badge {
             display: inline-block;
-            padding: 4px 16px;
+            padding: 4px 14px;
             border-radius: 30px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
-            background: var(--primary-light);
+            background: var(--sakai-blue);
             color: #fff;
             transition: var(--transition);
         }
 
         .course-card:hover .card-badge {
-            background: var(--gold-dark);
+            background: var(--sakai-gold-dark);
         }
 
         .course-card.ct .card-badge {
-            background: var(--primary-light);
+            background: var(--sakai-blue);
         }
 
         .course-card.aw .card-badge {
@@ -717,23 +757,24 @@
         }
 
         .course-card .card-lectures {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-light);
         }
 
         .course-card .card-progress {
             font-size: 12px;
-            color: var(--emerald);
+            color: var(--sakai-green);
             font-weight: 600;
+            margin-top: 6px;
         }
 
         /* ============================================================
-           LECTURE VIEW
+           LECTURE VIEW - SAKAI STYLE
            ============================================================ */
         #lectureView {
             display: none;
             background: var(--card);
-            padding: 24px 28px 34px;
+            padding: 20px 24px 28px;
             border-radius: 0 0 var(--radius) var(--radius);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
         }
@@ -742,33 +783,34 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
 
         #lectureView .back-row .left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         #lectureView .back-row h3 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             color: var(--primary);
         }
 
         #lectureView .back-row .course-badge {
             display: inline-block;
-            padding: 4px 14px;
+            padding: 3px 12px;
             border-radius: 30px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
         }
 
         #lectureView .back-row .course-badge.ct {
-            background: var(--primary-light);
+            background: var(--sakai-blue);
             color: #fff;
         }
 
@@ -780,12 +822,12 @@
         #lectureView .back-row .back-btn {
             background: #F0F2F5;
             border: none;
-            padding: 8px 20px;
+            padding: 6px 18px;
             border-radius: 30px;
             font-weight: 600;
-            color: var(--primary-light);
+            color: var(--sakai-blue);
             cursor: pointer;
-            font-size: 13px;
+            font-size: 12px;
             transition: var(--transition);
         }
 
@@ -794,41 +836,41 @@
         }
 
         #lectureView .search-row {
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
         #lectureView .search-row input {
             flex: 1;
-            min-width: 200px;
-            padding: 10px 16px;
+            min-width: 160px;
+            padding: 8px 14px;
             border: 2px solid #E5E7EB;
-            border-radius: 12px;
-            font-size: 14px;
+            border-radius: var(--radius);
+            font-size: 13px;
             transition: var(--transition);
             background: #FAFBFC;
         }
 
         #lectureView .search-row input:focus {
-            border-color: var(--primary-light);
+            border-color: var(--sakai-blue);
             outline: none;
-            box-shadow: 0 0 0 4px rgba(26, 58, 107, 0.06);
+            box-shadow: 0 0 0 4px rgba(18, 99, 155, 0.06);
         }
 
         #lectureView .search-row .filter-btns {
             display: flex;
-            gap: 6px;
+            gap: 4px;
             flex-wrap: wrap;
         }
 
         #lectureView .search-row .filter-btns button {
-            padding: 8px 16px;
+            padding: 6px 14px;
             border: 2px solid #E5E7EB;
             border-radius: 30px;
             background: #fff;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 500;
             cursor: pointer;
             transition: var(--transition);
@@ -836,27 +878,27 @@
         }
 
         #lectureView .search-row .filter-btns button:hover {
-            border-color: var(--primary-light);
+            border-color: var(--sakai-blue);
             color: var(--primary);
         }
 
         #lectureView .search-row .filter-btns button.active {
-            border-color: var(--primary-light);
-            background: var(--primary-light);
+            border-color: var(--sakai-blue);
+            background: var(--sakai-blue);
             color: #fff;
         }
 
         .lecture-bar-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .lecture-bar {
             background: #F8FAFC;
             border: 1px solid #E5E7EB;
-            border-radius: 12px;
-            padding: 14px 20px;
+            border-radius: var(--radius);
+            padding: 12px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -866,60 +908,60 @@
 
         .lecture-bar:hover {
             background: #EEF2F7;
-            border-color: var(--primary-light);
+            border-color: var(--sakai-blue);
             transform: translateX(4px);
         }
 
         .lecture-bar .bar-left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .lecture-bar .bar-left .num {
             font-weight: 700;
-            color: var(--primary-light);
-            font-size: 14px;
-            min-width: 28px;
+            color: var(--sakai-blue);
+            font-size: 13px;
+            min-width: 24px;
         }
 
         .lecture-bar .bar-left .name {
             font-weight: 500;
             color: var(--text);
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .lecture-bar .bar-left .badge-master {
             background: #8E44AD;
             color: #fff;
-            font-size: 9px;
-            padding: 2px 10px;
+            font-size: 8px;
+            padding: 2px 8px;
             border-radius: 20px;
             font-weight: 700;
-            margin-left: 6px;
         }
 
         .lecture-bar .bar-left .badge-complete {
-            background: var(--emerald);
+            background: var(--sakai-green);
             color: #fff;
-            font-size: 9px;
-            padding: 2px 10px;
+            font-size: 8px;
+            padding: 2px 8px;
             border-radius: 20px;
             font-weight: 700;
-            margin-left: 6px;
         }
 
         .lecture-bar .bar-right {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
         .lecture-bar .bar-right .status {
             display: inline-block;
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 20px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
         }
 
@@ -939,12 +981,12 @@
         }
 
         .lecture-bar .bar-right .time-est {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-light);
         }
 
         /* ============================================================
-           QUIZ CONTAINER
+           QUIZ CONTAINER - SAKAI STYLE
            ============================================================ */
         #quizContainer {
             display: none;
@@ -957,18 +999,18 @@
 
         .quiz-header {
             background: #FAFBFC;
-            padding: 16px 24px 12px;
+            padding: 14px 20px 10px;
             border-bottom: 1px solid #E5E7EB;
         }
 
         .quiz-header .exam-title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             color: var(--primary);
         }
 
         .quiz-header .section-label {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-light);
             margin-top: 2px;
         }
@@ -977,12 +1019,12 @@
             background: #F0F2F5;
             border: 1px solid #E5E7EB;
             border-radius: 8px;
-            padding: 8px 16px;
-            margin-top: 10px;
+            padding: 6px 14px;
+            margin-top: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text);
         }
 
@@ -992,7 +1034,7 @@
 
         .quiz-header .question-bar .q-right {
             font-weight: 600;
-            color: var(--primary-light);
+            color: var(--sakai-blue);
         }
 
         .quiz-progress-sidebar {
@@ -1000,21 +1042,21 @@
             right: 0;
             top: 0;
             bottom: 0;
-            width: 48px;
+            width: 40px;
             background: #F8FAFC;
             border-left: 1px solid #E5E7EB;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 12px 0;
-            gap: 4px;
+            padding: 10px 0;
+            gap: 3px;
             overflow-y: auto;
             z-index: 5;
         }
 
         .quiz-progress-sidebar .dot {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             border: 2px solid #D1D5DB;
             background: #fff;
@@ -1024,13 +1066,13 @@
         }
 
         .quiz-progress-sidebar .dot.answered {
-            background: var(--emerald);
-            border-color: var(--emerald);
+            background: var(--sakai-green);
+            border-color: var(--sakai-green);
         }
 
         .quiz-progress-sidebar .dot.current {
-            border-color: var(--primary-light);
-            box-shadow: 0 0 0 3px rgba(26, 58, 107, 0.15);
+            border-color: var(--sakai-blue);
+            box-shadow: 0 0 0 3px rgba(18, 99, 155, 0.15);
             transform: scale(1.15);
         }
 
@@ -1040,55 +1082,55 @@
         }
 
         .quiz-body {
-            padding: 24px 28px 16px;
-            padding-right: 72px;
+            padding: 20px 24px 14px;
+            padding-right: 56px;
             position: relative;
         }
 
         .quiz-body .question-block {
-            border-left: 4px solid var(--primary-light);
-            padding-left: 18px;
-            margin-bottom: 20px;
-        }
-
-        .quiz-body .question-block .q-text {
-            font-size: 17px;
-            font-weight: 500;
-            color: var(--text);
-            line-height: 1.6;
+            border-left: 4px solid var(--sakai-blue);
+            padding-left: 14px;
             margin-bottom: 16px;
         }
 
+        .quiz-body .question-block .q-text {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+
         .quiz-body .question-block .q-meta {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-light);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
         .quiz-body .question-block .q-meta .tag {
             background: #F0F2F5;
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 20px;
         }
 
         .options-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-bottom: 10px;
+            gap: 8px;
+            margin-bottom: 8px;
         }
 
         .options-list .opt-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 15px;
+            gap: 10px;
+            font-size: 14px;
             color: var(--text);
-            padding: 8px 12px;
-            border-radius: 10px;
+            padding: 6px 10px;
+            border-radius: 8px;
             cursor: pointer;
             transition: var(--transition);
             border: 2px solid transparent;
@@ -1100,22 +1142,22 @@
         }
 
         .options-list .opt-item input[type="radio"] {
-            width: 17px;
-            height: 17px;
-            accent-color: var(--primary-light);
+            width: 16px;
+            height: 16px;
+            accent-color: var(--sakai-blue);
             cursor: pointer;
             flex-shrink: 0;
         }
 
         .options-list .opt-item .opt-letter {
             font-weight: 600;
-            color: var(--primary-light);
-            min-width: 20px;
+            color: var(--sakai-blue);
+            min-width: 18px;
         }
 
         .reset-link {
-            color: var(--primary-light);
-            font-size: 13px;
+            color: var(--sakai-blue);
+            font-size: 12px;
             font-weight: 500;
             text-decoration: underline;
             cursor: pointer;
@@ -1125,17 +1167,17 @@
         }
 
         .reset-link:hover {
-            color: var(--gold-dark);
+            color: var(--sakai-gold-dark);
         }
 
         .flag-link {
             color: var(--amber);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             cursor: pointer;
             display: inline-block;
             margin-top: 2px;
-            margin-left: 16px;
+            margin-left: 12px;
             transition: var(--transition);
         }
 
@@ -1144,21 +1186,21 @@
         }
 
         .quiz-nav {
-            padding: 14px 28px 22px;
+            padding: 12px 24px 18px;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
             border-top: 1px solid #E5E7EB;
             align-items: center;
-            padding-right: 72px;
+            padding-right: 56px;
         }
 
         .quiz-nav .btn {
-            padding: 10px 28px;
+            padding: 8px 22px;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             transition: var(--transition);
         }
@@ -1168,35 +1210,35 @@
         }
 
         .quiz-nav .btn-next {
-            background: var(--primary);
+            background: var(--sakai-blue);
             color: #fff;
-            box-shadow: 0 2px 10px rgba(10, 22, 40, 0.2);
+            box-shadow: 0 2px 8px rgba(18, 99, 155, 0.2);
         }
 
         .quiz-nav .btn-next:hover {
-            box-shadow: 0 4px 20px rgba(10, 22, 40, 0.3);
+            box-shadow: 0 4px 16px rgba(18, 99, 155, 0.3);
             transform: translateY(-2px);
         }
 
         .quiz-nav .btn-save {
-            background: var(--gold);
+            background: var(--sakai-gold);
             color: var(--primary);
-            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.25);
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
         }
 
         .quiz-nav .btn-save:hover {
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
             transform: translateY(-2px);
         }
 
         .quiz-nav .btn-submit {
-            background: var(--emerald);
+            background: var(--sakai-green);
             color: #fff;
-            box-shadow: 0 2px 10px rgba(46, 204, 113, 0.25);
+            box-shadow: 0 2px 8px rgba(58, 131, 58, 0.2);
         }
 
         .quiz-nav .btn-submit:hover {
-            box-shadow: 0 4px 20px rgba(46, 204, 113, 0.35);
+            box-shadow: 0 4px 16px rgba(58, 131, 58, 0.3);
             transform: translateY(-2px);
         }
 
@@ -1211,72 +1253,72 @@
         }
 
         .quiz-footer {
-            padding: 10px 24px 14px;
+            padding: 8px 20px 12px;
             border-top: 1px solid #E5E7EB;
             display: flex;
             justify-content: center;
-            gap: 24px;
-            font-size: 12px;
+            gap: 16px;
+            font-size: 11px;
             color: var(--text-light);
             flex-wrap: wrap;
         }
 
         .quiz-footer a {
-            color: var(--primary-light);
+            color: var(--sakai-blue);
             text-decoration: none;
             transition: var(--transition);
         }
 
         .quiz-footer a:hover {
-            color: var(--gold-dark);
+            color: var(--sakai-gold-dark);
             text-decoration: underline;
         }
 
         /* ============================================================
-           RESULTS CONTAINER - PREMIUM
+           RESULTS CONTAINER - SAKAI STYLE
            ============================================================ */
         #resultsContainer {
             display: none;
             background: var(--card);
-            padding: 32px 36px 40px;
+            padding: 28px 28px 32px;
             border-radius: 0 0 var(--radius) var(--radius);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
         }
 
         #resultsContainer .result-header {
             text-align: center;
-            padding-bottom: 24px;
+            padding-bottom: 20px;
             border-bottom: 2px solid #E5E7EB;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         #resultsContainer .result-header .score-circle {
-            width: 130px;
-            height: 130px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: linear-gradient(135deg, var(--sakai-blue), var(--primary-light));
             color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 12px;
-            box-shadow: 0 8px 30px rgba(10, 22, 40, 0.2);
+            margin: 0 auto 10px;
+            box-shadow: 0 4px 20px rgba(18, 99, 155, 0.2);
             transition: var(--transition);
         }
 
         #resultsContainer .result-header .score-circle .score-num {
-            font-size: 38px;
+            font-size: 34px;
             font-weight: 800;
         }
 
         #resultsContainer .result-header .score-circle .score-label {
-            font-size: 14px;
+            font-size: 12px;
             opacity: 0.8;
         }
 
         #resultsContainer .result-header .score-circle.pass {
-            background: linear-gradient(135deg, #1A7A3A, var(--emerald));
+            background: linear-gradient(135deg, #1A7A3A, var(--sakai-green));
         }
 
         #resultsContainer .result-header .score-circle.fail {
@@ -1284,27 +1326,27 @@
         }
 
         #resultsContainer .result-header h2 {
-            font-size: 24px;
+            font-size: 22px;
             color: var(--primary);
         }
 
         #resultsContainer .result-header p {
             color: var(--text-light);
-            font-size: 14px;
+            font-size: 13px;
         }
 
         #resultsContainer .result-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-bottom: 28px;
+            gap: 12px;
+            margin-bottom: 24px;
             text-align: center;
         }
 
         #resultsContainer .result-stats .stat-item {
             background: #F8FAFC;
-            padding: 16px;
-            border-radius: 12px;
+            padding: 14px;
+            border-radius: var(--radius);
             border: 1px solid #E5E7EB;
             transition: var(--transition);
         }
@@ -1315,18 +1357,18 @@
         }
 
         #resultsContainer .result-stats .stat-item .stat-num {
-            font-size: 30px;
+            font-size: 28px;
             font-weight: 700;
             color: var(--primary);
         }
 
         #resultsContainer .result-stats .stat-item .stat-label {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-light);
         }
 
         #resultsContainer .result-stats .stat-item .stat-num.correct {
-            color: var(--emerald);
+            color: var(--sakai-green);
         }
 
         #resultsContainer .result-stats .stat-item .stat-num.wrong {
@@ -1338,23 +1380,23 @@
         }
 
         #resultsContainer .wrong-answers {
-            margin-top: 20px;
+            margin-top: 16px;
         }
 
         #resultsContainer .wrong-answers h3 {
-            font-size: 18px;
+            font-size: 17px;
             color: var(--primary);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         #resultsContainer .wrong-answers h3 .count {
             background: var(--ruby);
             color: #fff;
-            font-size: 12px;
-            padding: 2px 12px;
+            font-size: 11px;
+            padding: 2px 10px;
             border-radius: 30px;
             font-weight: 600;
         }
@@ -1362,8 +1404,8 @@
         #resultsContainer .wrong-answer-item {
             background: #FDF2F2;
             border-left: 4px solid var(--ruby);
-            padding: 16px 20px;
-            margin-bottom: 12px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
             border-radius: 8px;
             transition: var(--transition);
         }
@@ -1375,16 +1417,17 @@
         #resultsContainer .wrong-answer-item .wa-q {
             font-weight: 600;
             color: var(--text);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
+            font-size: 14px;
         }
 
         #resultsContainer .wrong-answer-item .wa-detail {
-            font-size: 14px;
+            font-size: 13px;
             color: #555;
         }
 
         #resultsContainer .wrong-answer-item .wa-detail .wa-correct {
-            color: var(--emerald);
+            color: var(--sakai-green);
             font-weight: 600;
         }
 
@@ -1394,29 +1437,29 @@
         }
 
         #resultsContainer .wrong-answer-item .wa-detail .wa-explanation {
-            color: var(--primary-light);
+            color: var(--sakai-blue);
             font-style: italic;
             margin-top: 4px;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .edward-message {
             text-align: center;
-            padding: 18px 24px;
-            margin: 24px 0 16px;
+            padding: 16px 20px;
+            margin: 20px 0 14px;
             background: linear-gradient(135deg, #FEF9E7, #FDEBD0);
-            border-radius: 12px;
-            border-left: 5px solid var(--gold);
-            box-shadow: 0 2px 12px rgba(212, 175, 55, 0.1);
+            border-radius: var(--radius);
+            border-left: 5px solid var(--sakai-gold);
+            box-shadow: 0 2px 12px rgba(212, 175, 55, 0.08);
         }
 
         .edward-message .msg-icon {
-            font-size: 30px;
+            font-size: 28px;
             display: block;
         }
 
         .edward-message .msg-text {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             color: #7D6608;
             margin-top: 4px;
@@ -1426,183 +1469,542 @@
             color: var(--ruby);
         }
 
+        .edward-message .channel-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--sakai-blue);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            margin-top: 8px;
+            padding: 4px 14px;
+            background: #E8F0FE;
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+
+        .edward-message .channel-link:hover {
+            background: #D1E3FF;
+            transform: scale(1.02);
+        }
+
         #resultsContainer .btn-back-dashboard {
             display: block;
             width: 100%;
-            max-width: 280px;
-            margin: 20px auto 0;
-            padding: 14px;
-            background: var(--primary);
+            max-width: 260px;
+            margin: 16px auto 0;
+            padding: 12px;
+            background: var(--sakai-blue);
             color: #fff;
             border: none;
-            border-radius: 12px;
-            font-size: 16px;
+            border-radius: var(--radius);
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 2px 12px rgba(10, 22, 40, 0.15);
+            box-shadow: 0 2px 12px rgba(18, 99, 155, 0.15);
         }
 
         #resultsContainer .btn-back-dashboard:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 24px rgba(10, 22, 40, 0.25);
+            box-shadow: 0 4px 20px rgba(18, 99, 155, 0.25);
         }
 
         /* ============================================================
-           RESPONSIVE
+           RESPONSIVE - FULL SCREEN ADJUSTMENT
            ============================================================ */
-        @media (max-width: 768px) {
-            .course-grid {
-                grid-template-columns: 1fr;
+        @media (max-width: 1024px) {
+            #appContainer {
+                max-width: 100%;
+                padding: 0;
             }
             .top-header {
-                padding: 10px 16px;
-                border-radius: 12px 12px 0 0;
-            }
-            .top-header .brand .brand-text .main-title {
-                font-size: 14px;
+                padding: 10px 18px;
             }
             .timer-banner {
-                padding: 8px 16px;
-            }
-            .timer-banner .timer-text {
-                font-size: 16px;
+                padding: 8px 18px;
             }
             #dashboard {
-                padding: 18px 14px 24px;
-            }
-            #dashboard .welcome-row .greeting h2 {
-                font-size: 20px;
-            }
-            #dashboard .stats-row {
-                flex-direction: column;
-                gap: 6px;
-                padding: 12px 16px;
+                padding: 20px 20px 28px;
             }
             #lectureView {
-                padding: 16px 14px 24px;
+                padding: 16px 18px 24px;
             }
             .quiz-body {
-                padding: 16px 14px 12px;
-                padding-right: 56px;
-            }
-            .quiz-body .question-block {
-                padding-left: 12px;
-            }
-            .quiz-body .question-block .q-text {
-                font-size: 15px;
+                padding: 16px 18px 12px;
+                padding-right: 52px;
             }
             .quiz-nav {
-                padding: 12px 14px 18px;
-                padding-right: 56px;
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .quiz-nav .btn-back {
-                margin-right: 0;
-            }
-            .quiz-progress-sidebar {
-                width: 40px;
-            }
-            .quiz-progress-sidebar .dot {
-                width: 14px;
-                height: 14px;
-            }
-            #loginScreen {
-                padding: 32px 20px 32px;
-            }
-            #loginScreen .uni-name {
-                font-size: 24px;
-            }
-            .lecture-bar {
-                padding: 10px 14px;
-                flex-wrap: wrap;
-                gap: 4px;
-            }
-            .lecture-bar .bar-left .name {
-                font-size: 13px;
-            }
-            .course-card {
-                padding: 18px 20px 22px;
-            }
-            .course-card .card-title {
-                font-size: 18px;
+                padding: 10px 18px 16px;
+                padding-right: 52px;
             }
             #resultsContainer {
-                padding: 20px 16px 28px;
-            }
-            #resultsContainer .result-stats {
-                grid-template-columns: 1fr 1fr;
-            }
-            #resultsContainer .result-header .score-circle {
-                width: 100px;
-                height: 100px;
-            }
-            #resultsContainer .result-header .score-circle .score-num {
-                font-size: 30px;
-            }
-            .edward-message .msg-text {
-                font-size: 14px;
-            }
-            #lectureView .search-row {
-                flex-direction: column;
-            }
-            #lectureView .search-row .filter-btns {
-                flex-wrap: wrap;
+                padding: 24px 20px 28px;
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
+            body {
+                padding: 8px;
+            }
+
+            #loginScreen {
+                padding: 28px 18px 24px;
+                max-width: 100%;
+                border-radius: var(--radius);
+            }
+            #loginScreen .uni-name {
+                font-size: 22px;
+            }
+            #loginScreen .tagline .main {
+                font-size: 16px;
+            }
+
+            .course-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .top-header {
+                padding: 8px 14px;
+                border-radius: var(--radius) var(--radius) 0 0;
+            }
+            .top-header .brand .brand-text .main-title {
+                font-size: 13px;
+            }
+            .top-header .brand .brand-text .sub-title {
+                font-size: 9px;
+            }
             .top-header .brand .logo-icon {
                 font-size: 20px;
             }
-            .top-header .brand .brand-text .main-title {
+            .top-header .user-area .avatar {
+                width: 32px;
+                height: 32px;
                 font-size: 12px;
             }
-            .top-header .brand .brand-text .sub-title {
-                font-size: 10px;
+            .top-header .user-area .bell {
+                font-size: 16px;
+            }
+
+            .timer-banner {
+                padding: 6px 14px;
             }
             .timer-banner .timer-text {
-                font-size: 14px;
+                font-size: 15px;
             }
-            .quiz-nav .btn {
-                padding: 8px 18px;
-                font-size: 13px;
+            .timer-banner .timer-text .timer-icon {
+                font-size: 16px;
             }
-            .options-list .opt-item {
-                font-size: 13px;
+
+            #dashboard {
+                padding: 16px 14px 20px;
             }
             #dashboard .welcome-row .greeting h2 {
                 font-size: 18px;
             }
+            #dashboard .welcome-row .greeting .wave {
+                font-size: 24px;
+            }
+            #dashboard .welcome-row .index-badge {
+                font-size: 11px;
+                padding: 3px 12px;
+            }
+            #dashboard .stats-row {
+                padding: 10px 12px;
+                gap: 8px;
+            }
+            #dashboard .stats-row .stat-item {
+                font-size: 12px;
+            }
+            #dashboard .stats-row .stat-item .num {
+                font-size: 15px;
+            }
+            #dashboard .motivational {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+
+            .course-card {
+                padding: 16px 18px 18px;
+            }
+            .course-card .card-title {
+                font-size: 16px;
+            }
+            .course-card .card-icon {
+                font-size: 24px;
+            }
+            .course-card .card-desc {
+                font-size: 11px;
+            }
+            .course-card .card-badge {
+                font-size: 10px;
+                padding: 3px 12px;
+            }
+
+            #lectureView {
+                padding: 14px 14px 20px;
+            }
+            #lectureView .back-row h3 {
+                font-size: 16px;
+            }
+            #lectureView .back-row .back-btn {
+                font-size: 11px;
+                padding: 5px 14px;
+            }
+            #lectureView .search-row input {
+                font-size: 12px;
+                padding: 6px 12px;
+                min-width: 120px;
+            }
+            #lectureView .search-row .filter-btns button {
+                font-size: 10px;
+                padding: 5px 12px;
+            }
+
+            .lecture-bar {
+                padding: 10px 14px;
+            }
+            .lecture-bar .bar-left .name {
+                font-size: 12px;
+            }
+            .lecture-bar .bar-left .num {
+                font-size: 12px;
+                min-width: 20px;
+            }
+            .lecture-bar .bar-right .status {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
+            .lecture-bar .bar-right .time-est {
+                font-size: 9px;
+            }
+
+            .quiz-header {
+                padding: 10px 14px 8px;
+            }
+            .quiz-header .exam-title {
+                font-size: 15px;
+            }
+            .quiz-header .section-label {
+                font-size: 11px;
+            }
+            .quiz-header .question-bar {
+                font-size: 11px;
+                padding: 5px 12px;
+            }
+
+            .quiz-body {
+                padding: 14px 14px 10px;
+                padding-right: 48px;
+            }
+            .quiz-body .question-block .q-text {
+                font-size: 14px;
+            }
+            .quiz-body .question-block .q-meta {
+                font-size: 10px;
+                gap: 8px;
+            }
+            .options-list .opt-item {
+                font-size: 13px;
+                padding: 4px 8px;
+            }
+            .options-list .opt-item input[type="radio"] {
+                width: 14px;
+                height: 14px;
+            }
+            .reset-link,
+            .flag-link {
+                font-size: 11px;
+            }
+
+            .quiz-nav {
+                padding: 10px 14px 14px;
+                padding-right: 48px;
+                gap: 8px;
+            }
+            .quiz-nav .btn {
+                font-size: 12px;
+                padding: 6px 16px;
+            }
+
             .quiz-progress-sidebar {
                 width: 32px;
+                padding: 8px 0;
             }
             .quiz-progress-sidebar .dot {
                 width: 12px;
                 height: 12px;
             }
-            .quiz-body {
-                padding-right: 44px;
+
+            .quiz-footer {
+                font-size: 10px;
+                gap: 12px;
+                padding: 6px 14px 10px;
             }
-            .quiz-nav {
-                padding-right: 44px;
+
+            #resultsContainer {
+                padding: 18px 14px 22px;
             }
-            .course-card .card-title {
-                font-size: 16px;
+            #resultsContainer .result-header .score-circle {
+                width: 90px;
+                height: 90px;
             }
-            .course-card .card-desc {
+            #resultsContainer .result-header .score-circle .score-num {
+                font-size: 28px;
+            }
+            #resultsContainer .result-header h2 {
+                font-size: 18px;
+            }
+            #resultsContainer .result-header p {
                 font-size: 12px;
             }
             #resultsContainer .result-stats {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            #resultsContainer .result-stats .stat-item {
+                padding: 10px;
+            }
+            #resultsContainer .result-stats .stat-item .stat-num {
+                font-size: 22px;
+            }
+            #resultsContainer .result-stats .stat-item .stat-label {
+                font-size: 10px;
+            }
+            #resultsContainer .wrong-answers h3 {
+                font-size: 15px;
+            }
+            #resultsContainer .wrong-answer-item {
+                padding: 10px 12px;
+            }
+            #resultsContainer .wrong-answer-item .wa-q {
+                font-size: 13px;
+            }
+            #resultsContainer .wrong-answer-item .wa-detail {
+                font-size: 12px;
             }
             .edward-message .msg-text {
                 font-size: 13px;
             }
-            #loginScreen .tagline .main {
-                font-size: 17px;
+            .edward-message .channel-link {
+                font-size: 12px;
             }
+            #resultsContainer .btn-back-dashboard {
+                font-size: 13px;
+                padding: 10px;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 4px;
+            }
+
+            #loginScreen {
+                padding: 20px 14px 20px;
+            }
+            #loginScreen .uni-name {
+                font-size: 20px;
+            }
+            #loginScreen .tagline .main {
+                font-size: 14px;
+            }
+            #loginScreen .tagline {
+                padding: 10px 14px;
+            }
+            #loginScreen .crest {
+                font-size: 28px;
+            }
+            .input-group input {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+            .login-options {
+                font-size: 12px;
+            }
+            #loginBtn {
+                font-size: 15px;
+                padding: 12px;
+            }
+            .login-footer-text {
+                font-size: 10px;
+            }
+
+            .top-header .brand .brand-text .main-title {
+                font-size: 11px;
+            }
+            .top-header .brand .brand-text .sub-title {
+                font-size: 8px;
+            }
+            .top-header .brand .logo-icon {
+                font-size: 16px;
+            }
+            .top-header .user-area .avatar {
+                width: 28px;
+                height: 28px;
+                font-size: 10px;
+            }
+            .top-header .user-area .bell {
+                font-size: 14px;
+            }
+            .top-header .user-area .bell .badge {
+                width: 12px;
+                height: 12px;
+                font-size: 7px;
+                top: -4px;
+                right: -4px;
+            }
+
+            .timer-banner .timer-text {
+                font-size: 13px;
+            }
+            .timer-banner .timer-toggle {
+                font-size: 10px;
+            }
+
+            #dashboard .welcome-row .greeting h2 {
+                font-size: 16px;
+            }
+            #dashboard .welcome-row .greeting .wave {
+                font-size: 20px;
+            }
+            #dashboard .welcome-row .index-badge {
+                font-size: 10px;
+                padding: 2px 10px;
+            }
+            #dashboard .stats-row .stat-item {
+                font-size: 10px;
+            }
+            #dashboard .stats-row .stat-item .num {
+                font-size: 13px;
+            }
+
+            .course-card {
+                padding: 12px 14px 14px;
+            }
+            .course-card .card-title {
+                font-size: 14px;
+            }
+            .course-card .card-icon {
+                font-size: 20px;
+            }
+            .course-card .card-desc {
+                font-size: 10px;
+            }
+            .course-card .card-badge {
+                font-size: 9px;
+                padding: 2px 10px;
+            }
+            .course-card .card-lectures {
+                font-size: 10px;
+            }
+
+            #lectureView .back-row h3 {
+                font-size: 14px;
+            }
+            #lectureView .back-row .back-btn {
+                font-size: 10px;
+                padding: 4px 12px;
+            }
+            .lecture-bar .bar-left .name {
+                font-size: 11px;
+            }
+            .lecture-bar .bar-left .num {
+                font-size: 10px;
+                min-width: 16px;
+            }
+            .lecture-bar .bar-left .badge-master,
+            .lecture-bar .bar-left .badge-complete {
+                font-size: 7px;
+                padding: 1px 6px;
+            }
+            .lecture-bar {
+                padding: 8px 10px;
+            }
+            .lecture-bar .bar-right .status {
+                font-size: 8px;
+                padding: 1px 6px;
+            }
+            .lecture-bar .bar-right .time-est {
+                font-size: 8px;
+            }
+
+            .quiz-header .exam-title {
+                font-size: 13px;
+            }
+            .quiz-header .section-label {
+                font-size: 10px;
+            }
+            .quiz-header .question-bar {
+                font-size: 10px;
+                padding: 4px 10px;
+            }
+
+            .quiz-body .question-block .q-text {
+                font-size: 13px;
+            }
+            .options-list .opt-item {
+                font-size: 12px;
+                padding: 3px 6px;
+            }
+            .options-list .opt-item input[type="radio"] {
+                width: 13px;
+                height: 13px;
+            }
+            .reset-link,
+            .flag-link {
+                font-size: 10px;
+            }
+            .quiz-nav .btn {
+                font-size: 11px;
+                padding: 5px 12px;
+            }
+
+            .quiz-progress-sidebar {
+                width: 28px;
+                padding: 6px 0;
+            }
+            .quiz-progress-sidebar .dot {
+                width: 10px;
+                height: 10px;
+                border-width: 1.5px;
+            }
+
+            #resultsContainer .result-header .score-circle {
+                width: 75px;
+                height: 75px;
+            }
+            #resultsContainer .result-header .score-circle .score-num {
+                font-size: 24px;
+            }
+            #resultsContainer .result-header h2 {
+                font-size: 16px;
+            }
+            #resultsContainer .result-stats .stat-item .stat-num {
+                font-size: 18px;
+            }
+            #resultsContainer .wrong-answers h3 {
+                font-size: 13px;
+            }
+            #resultsContainer .wrong-answer-item .wa-q {
+                font-size: 12px;
+            }
+            #resultsContainer .wrong-answer-item .wa-detail {
+                font-size: 11px;
+            }
+            .edward-message .msg-text {
+                font-size: 12px;
+            }
+        }
+
+        /* ============================================================
+           UTILITY - HIDE TIMER
+           ============================================================ */
+        .timer-banner.hidden {
+            display: none !important;
         }
     </style>
 </head>
@@ -1645,7 +2047,10 @@
         </div>
         <button id="loginBtn">🚀 Continue to Dashboard</button>
         <div class="login-footer-text">
-            © 2024 <span>Edward Sam</span> • All Rights Reserved
+            <span>© 2025 Edward Sam</span>
+            <a href="https://whatsapp.com/channel/0029VbD4pXz0lwgtrv1PML0O" target="_blank" class="channel-link">
+                📱 Follow us on WhatsApp Channel
+            </a>
         </div>
     </div>
 
@@ -1671,7 +2076,7 @@
         </div>
 
         <!-- TIMER BANNER -->
-        <div class="timer-banner">
+        <div class="timer-banner" id="timerBanner">
             <div class="timer-text">
                 <span class="timer-icon">⏱️</span>
                 <span id="timerDisplay">Time Remaining: 40:00</span>
@@ -1818,6 +2223,9 @@
             <div class="edward-message">
                 <span class="msg-icon">🌟</span>
                 <div class="msg-text">Edward Sam wishes you all the best in your upcoming test! <span>💪🏽📚</span></div>
+                <a href="https://whatsapp.com/channel/0029VbD4pXz0lwgtrv1PML0O" target="_blank" class="channel-link">
+                    📱 Follow EDWARD SAM on WhatsApp
+                </a>
             </div>
             <button class="btn-back-dashboard" id="resultsBackBtn">← Back to Dashboard</button>
         </div>
@@ -1906,6 +2314,7 @@
 
             const timerDisplay = document.getElementById('timerDisplay');
             const timerToggle = document.getElementById('timerToggle');
+            const timerBanner = document.getElementById('timerBanner');
 
             const lectureBarList = document.getElementById('lectureBarList');
             const backToDashboardBtn = document.getElementById('backToDashboardBtn');
@@ -2158,7 +2567,6 @@
                 // Update course progress
                 const ctProgress = document.getElementById('ctProgress');
                 const awProgress = document.getElementById('awProgress');
-                // Simplified progress - you can make this more sophisticated
                 ctProgress.textContent = '📈 ' + Math.min(rate + 10, 100) + '% complete';
                 awProgress.textContent = '📈 ' + Math.min(rate, 100) + '% complete';
             }
@@ -2363,7 +2771,6 @@
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-                    // Simple filter - just re-render with search
                     if (state.currentCourse) {
                         renderLectureBars(state.currentCourse);
                     }
@@ -2542,7 +2949,7 @@
                     input.placeholder = 'Type your answer...';
                     input.style.cssText =
                         'width:100%;padding:10px 14px;border:2px solid #E5E7EB;border-radius:10px;font-size:15px;margin-top:6px;background:#FAFBFC;transition:border 0.2s;';
-                    input.addEventListener('focus', function() { this.style.borderColor = '#1A3A6B'; });
+                    input.addEventListener('focus', function() { this.style.borderColor = '#12639B'; });
                     input.addEventListener('blur', function() { this.style.borderColor = '#E5E7EB'; });
                     if (state.answers[q.number]) {
                         input.value = state.answers[q.number];
@@ -2558,7 +2965,7 @@
                     textarea.placeholder = 'Write your answer here...';
                     textarea.style.cssText =
                         'width:100%;padding:10px 14px;border:2px solid #E5E7EB;border-radius:10px;font-size:15px;min-height:80px;font-family:inherit;background:#FAFBFC;transition:border 0.2s;';
-                    textarea.addEventListener('focus', function() { this.style.borderColor = '#1A3A6B'; });
+                    textarea.addEventListener('focus', function() { this.style.borderColor = '#12639B'; });
                     textarea.addEventListener('blur', function() { this.style.borderColor = '#E5E7EB'; });
                     if (state.answers[q.number]) {
                         textarea.value = state.answers[q.number];
@@ -2693,12 +3100,11 @@
 
             timerToggle.addEventListener('click', function() {
                 state.timerVisible = !state.timerVisible;
-                const banner = document.querySelector('.timer-banner');
                 if (state.timerVisible) {
-                    banner.style.display = 'flex';
+                    timerBanner.classList.remove('hidden');
                     timerToggle.textContent = '▲ Hide Time Remaining ▲';
                 } else {
-                    banner.style.display = 'none';
+                    timerBanner.classList.add('hidden');
                     timerToggle.textContent = '▼ Show Time Remaining ▼';
                 }
             });
@@ -2789,9 +3195,6 @@
                     if (quizContainer.style.display !== 'none' && !state.isSubmitted) {
                         quizNextBtn.click();
                     }
-                }
-                if (e.key === 'ArrowLeft') {
-                    // Could add previous question functionality
                 }
                 if (e.key === 'f' || e.key === 'F') {
                     if (quizContainer.style.display !== 'none' && !state.isSubmitted) {
