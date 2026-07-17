@@ -1,0 +1,2826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edward Sam - UGRC 150 & 110 Question Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <style>
+        /* ============================================================
+           ROOT VARIABLES - PREMIUM COLOR PALETTE
+           ============================================================ */
+        :root {
+            --primary: #0A1628;
+            --primary-light: #1A3A6B;
+            --primary-dark: #060E1A;
+            --gold: #D4AF37;
+            --gold-light: #F0D060;
+            --gold-dark: #B8962A;
+            --emerald: #2ECC71;
+            --amber: #F39C12;
+            --ruby: #E74C3C;
+            --bg: #F5F6FA;
+            --card: #FFFFFF;
+            --text: #1A1A2E;
+            --text-light: #6B7280;
+            --shadow: 0 20px 60px rgba(10, 22, 40, 0.15);
+            --shadow-hover: 0 30px 80px rgba(10, 22, 40, 0.25);
+            --radius: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* ============================================================
+           RESET & BASE
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font);
+        }
+
+        body {
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: radial-gradient(ellipse at 10% 20%, rgba(10, 22, 40, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+        }
+
+        /* ============================================================
+           LOADING OVERLAY
+           ============================================================ */
+        #loadingOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 22, 40, 0.85);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #fff;
+            backdrop-filter: blur(8px);
+        }
+        #loadingOverlay.active {
+            display: flex;
+        }
+        #loadingOverlay .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        #loadingOverlay .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 20px;
+            letter-spacing: 1px;
+        }
+        #loadingOverlay .logo-text span {
+            color: var(--gold);
+        }
+        #loadingOverlay p {
+            margin-top: 8px;
+            font-size: 14px;
+            opacity: 0.7;
+            font-weight: 300;
+        }
+        #loadingOverlay .progress-bar {
+            margin-top: 16px;
+            width: 280px;
+            max-width: 80%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #loadingOverlay .progress-bar .fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            border-radius: 10px;
+            transition: width 0.5s;
+            width: 0%;
+        }
+
+        /* ============================================================
+           LOGIN SCREEN - PREMIUM
+           ============================================================ */
+        #loginScreen {
+            width: 100%;
+            max-width: 460px;
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 48px 36px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #loginScreen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--gold), var(--primary-light));
+        }
+
+        #loginScreen .crest {
+            font-size: 32px;
+            margin-bottom: 4px;
+        }
+
+        #loginScreen .logo-badge {
+            font-size: 13px;
+            letter-spacing: 2px;
+            color: var(--primary-light);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        #loginScreen .uni-name {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 2px;
+            letter-spacing: -0.5px;
+        }
+
+        #loginScreen .uni-name span {
+            color: var(--gold);
+        }
+
+        #loginScreen .sub-title {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 6px;
+            font-weight: 400;
+        }
+
+        #loginScreen .brand-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            margin: 12px auto 18px;
+            border-radius: 10px;
+        }
+
+        #loginScreen .tagline {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #fff;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 30px rgba(10, 22, 40, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #loginScreen .tagline::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 150px;
+            height: 150px;
+            background: rgba(212, 175, 55, 0.08);
+            border-radius: 50%;
+        }
+
+        #loginScreen .tagline .main {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        #loginScreen .tagline .main span {
+            color: var(--gold-light);
+        }
+
+        #loginScreen .tagline .motto {
+            display: block;
+            font-weight: 300;
+            font-size: 13px;
+            opacity: 0.85;
+            margin-top: 4px;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .input-group label .icon {
+            margin-right: 6px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: var(--transition);
+            background: #FAFBFC;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary-light);
+            outline: none;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(26, 58, 107, 0.08);
+        }
+
+        .input-group .error-msg {
+            font-size: 12px;
+            color: var(--ruby);
+            margin-top: 4px;
+            min-height: 18px;
+            font-weight: 500;
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 4px 0 20px;
+            font-size: 13px;
+        }
+
+        .login-options label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        .login-options label input[type="checkbox"] {
+            accent-color: var(--primary-light);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .login-options a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-options a:hover {
+            text-decoration: underline;
+        }
+
+        #loginBtn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(10, 22, 40, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #loginBtn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: rotate(45deg);
+            transition: 0.6s;
+        }
+
+        #loginBtn:hover::after {
+            left: 100%;
+        }
+
+        #loginBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(10, 22, 40, 0.35);
+        }
+
+        #loginBtn:active {
+            transform: scale(0.97);
+        }
+
+        .login-footer-text {
+            margin-top: 18px;
+            font-size: 12px;
+            color: var(--text-light);
+            letter-spacing: 0.5px;
+        }
+
+        .login-footer-text span {
+            color: var(--gold-dark);
+            font-weight: 600;
+        }
+
+        /* ============================================================
+           APP CONTAINER
+           ============================================================ */
+        #appContainer {
+            display: none;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* ============================================================
+           TOP HEADER - PREMIUM
+           ============================================================ */
+        .top-header {
+            background: var(--card);
+            padding: 12px 28px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            flex-wrap: wrap;
+            gap: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .top-header .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .top-header .brand .logo-icon {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--primary), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .top-header .brand .brand-text .main-title {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 16px;
+            line-height: 1.2;
+        }
+
+        .top-header .brand .brand-text .main-title span {
+            color: var(--gold-dark);
+        }
+
+        .top-header .brand .brand-text .sub-title {
+            font-size: 11px;
+            color: var(--text-light);
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        .top-header .user-area {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .top-header .user-area .bell {
+            font-size: 18px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .top-header .user-area .bell:hover {
+            color: var(--primary);
+        }
+
+        .top-header .user-area .bell .badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 16px;
+            height: 16px;
+            background: var(--ruby);
+            color: #fff;
+            font-size: 9px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .top-header .user-area .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(10, 22, 40, 0.15);
+            transition: var(--transition);
+        }
+
+        .top-header .user-area .avatar:hover {
+            transform: scale(1.05);
+        }
+
+        /* ============================================================
+           TIMER BANNER - PREMIUM
+           ============================================================ */
+        .timer-banner {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            padding: 10px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .timer-banner .timer-text {
+            color: #fff;
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .timer-banner .timer-text .timer-icon {
+            font-size: 22px;
+        }
+
+        .timer-banner .timer-toggle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            cursor: pointer;
+            text-decoration: underline;
+            font-weight: 400;
+            transition: var(--transition);
+        }
+
+        .timer-banner .timer-toggle:hover {
+            color: #fff;
+        }
+
+        .timer-banner .timer-warning {
+            color: #ff6b6b;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        /* ============================================================
+           DASHBOARD - PREMIUM
+           ============================================================ */
+        #dashboard {
+            background: var(--card);
+            padding: 28px 32px 36px;
+            border-radius: 0 0 var(--radius) var(--radius);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        #dashboard .welcome-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        #dashboard .welcome-row .greeting {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #dashboard .welcome-row .greeting .wave {
+            font-size: 32px;
+        }
+
+        #dashboard .welcome-row .greeting h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        #dashboard .welcome-row .greeting h2 span {
+            color: var(--gold-dark);
+        }
+
+        #dashboard .welcome-row .index-badge {
+            background: #F0F2F5;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--primary-light);
+            border: 1px solid #E5E7EB;
+        }
+
+        #dashboard .stats-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 16px 0 24px;
+            padding: 16px 20px;
+            background: #F8FAFC;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+        }
+
+        #dashboard .stats-row .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        #dashboard .stats-row .stat-item .num {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        #dashboard .stats-row .stat-item .num.gold {
+            color: var(--gold-dark);
+        }
+
+        #dashboard .stats-row .stat-item .num.green {
+            color: var(--emerald);
+        }
+
+        #dashboard .motivational {
+            background: linear-gradient(135deg, #FEF9E7, #FDEBD0);
+            padding: 12px 18px;
+            border-radius: 12px;
+            border-left: 4px solid var(--gold);
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: #7D6608;
+            font-style: italic;
+        }
+
+        #dashboard .motivational .author {
+            font-style: normal;
+            font-weight: 600;
+            color: var(--primary-light);
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 4px;
+        }
+
+        .course-card {
+            background: #F8FAFC;
+            border-radius: 16px;
+            padding: 24px 28px 28px;
+            border: 2px solid #E5E7EB;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            transition: var(--transition);
+        }
+
+        .course-card.ct::before {
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+        }
+
+        .course-card.aw::before {
+            background: linear-gradient(90deg, #8E44AD, #9B59B6);
+        }
+
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-light);
+        }
+
+        .course-card .card-icon {
+            font-size: 32px;
+            margin-bottom: 4px;
+        }
+
+        .course-card .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2px;
+        }
+
+        .course-card .card-desc {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        .course-card .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .course-card .card-badge {
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--primary-light);
+            color: #fff;
+            transition: var(--transition);
+        }
+
+        .course-card:hover .card-badge {
+            background: var(--gold-dark);
+        }
+
+        .course-card.ct .card-badge {
+            background: var(--primary-light);
+        }
+
+        .course-card.aw .card-badge {
+            background: #8E44AD;
+        }
+
+        .course-card .card-lectures {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .course-card .card-progress {
+            font-size: 12px;
+            color: var(--emerald);
+            font-weight: 600;
+        }
+
+        /* ============================================================
+           LECTURE VIEW
+           ============================================================ */
+        #lectureView {
+            display: none;
+            background: var(--card);
+            padding: 24px 28px 34px;
+            border-radius: 0 0 var(--radius) var(--radius);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        #lectureView .back-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #lectureView .back-row .left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        #lectureView .back-row h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        #lectureView .back-row .course-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        #lectureView .back-row .course-badge.ct {
+            background: var(--primary-light);
+            color: #fff;
+        }
+
+        #lectureView .back-row .course-badge.aw {
+            background: #8E44AD;
+            color: #fff;
+        }
+
+        #lectureView .back-row .back-btn {
+            background: #F0F2F5;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--primary-light);
+            cursor: pointer;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        #lectureView .back-row .back-btn:hover {
+            background: #E5E7EB;
+        }
+
+        #lectureView .search-row {
+            margin-bottom: 16px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        #lectureView .search-row input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 16px;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: var(--transition);
+            background: #FAFBFC;
+        }
+
+        #lectureView .search-row input:focus {
+            border-color: var(--primary-light);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(26, 58, 107, 0.06);
+        }
+
+        #lectureView .search-row .filter-btns {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        #lectureView .search-row .filter-btns button {
+            padding: 8px 16px;
+            border: 2px solid #E5E7EB;
+            border-radius: 30px;
+            background: #fff;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-light);
+        }
+
+        #lectureView .search-row .filter-btns button:hover {
+            border-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        #lectureView .search-row .filter-btns button.active {
+            border-color: var(--primary-light);
+            background: var(--primary-light);
+            color: #fff;
+        }
+
+        .lecture-bar-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .lecture-bar {
+            background: #F8FAFC;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .lecture-bar:hover {
+            background: #EEF2F7;
+            border-color: var(--primary-light);
+            transform: translateX(4px);
+        }
+
+        .lecture-bar .bar-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .lecture-bar .bar-left .num {
+            font-weight: 700;
+            color: var(--primary-light);
+            font-size: 14px;
+            min-width: 28px;
+        }
+
+        .lecture-bar .bar-left .name {
+            font-weight: 500;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .lecture-bar .bar-left .badge-master {
+            background: #8E44AD;
+            color: #fff;
+            font-size: 9px;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            margin-left: 6px;
+        }
+
+        .lecture-bar .bar-left .badge-complete {
+            background: var(--emerald);
+            color: #fff;
+            font-size: 9px;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            margin-left: 6px;
+        }
+
+        .lecture-bar .bar-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .lecture-bar .bar-right .status {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .lecture-bar .bar-right .status.loaded {
+            background: #D5F5E3;
+            color: #1A7A3A;
+        }
+
+        .lecture-bar .bar-right .status.loading {
+            background: #FDEBD0;
+            color: #9C6A00;
+        }
+
+        .lecture-bar .bar-right .status.failed {
+            background: #FADBD8;
+            color: #922B21;
+        }
+
+        .lecture-bar .bar-right .time-est {
+            font-size: 11px;
+            color: var(--text-light);
+        }
+
+        /* ============================================================
+           QUIZ CONTAINER
+           ============================================================ */
+        #quizContainer {
+            display: none;
+            background: var(--card);
+            border-radius: 0 0 var(--radius) var(--radius);
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .quiz-header {
+            background: #FAFBFC;
+            padding: 16px 24px 12px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .quiz-header .exam-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .quiz-header .section-label {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+        .quiz-header .question-bar {
+            background: #F0F2F5;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 8px 16px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        .quiz-header .question-bar .q-left {
+            font-weight: 500;
+        }
+
+        .quiz-header .question-bar .q-right {
+            font-weight: 600;
+            color: var(--primary-light);
+        }
+
+        .quiz-progress-sidebar {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 48px;
+            background: #F8FAFC;
+            border-left: 1px solid #E5E7EB;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 0;
+            gap: 4px;
+            overflow-y: auto;
+            z-index: 5;
+        }
+
+        .quiz-progress-sidebar .dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid #D1D5DB;
+            background: #fff;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quiz-progress-sidebar .dot.answered {
+            background: var(--emerald);
+            border-color: var(--emerald);
+        }
+
+        .quiz-progress-sidebar .dot.current {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(26, 58, 107, 0.15);
+            transform: scale(1.15);
+        }
+
+        .quiz-progress-sidebar .dot.flagged {
+            border-color: var(--amber);
+            background: var(--amber);
+        }
+
+        .quiz-body {
+            padding: 24px 28px 16px;
+            padding-right: 72px;
+            position: relative;
+        }
+
+        .quiz-body .question-block {
+            border-left: 4px solid var(--primary-light);
+            padding-left: 18px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-body .question-block .q-text {
+            font-size: 17px;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .quiz-body .question-block .q-meta {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .quiz-body .question-block .q-meta .tag {
+            background: #F0F2F5;
+            padding: 2px 12px;
+            border-radius: 20px;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .options-list .opt-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            color: var(--text);
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .options-list .opt-item:hover {
+            background: #F0F2F5;
+            border-color: #E5E7EB;
+        }
+
+        .options-list .opt-item input[type="radio"] {
+            width: 17px;
+            height: 17px;
+            accent-color: var(--primary-light);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .options-list .opt-item .opt-letter {
+            font-weight: 600;
+            color: var(--primary-light);
+            min-width: 20px;
+        }
+
+        .reset-link {
+            color: var(--primary-light);
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: underline;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 2px;
+            transition: var(--transition);
+        }
+
+        .reset-link:hover {
+            color: var(--gold-dark);
+        }
+
+        .flag-link {
+            color: var(--amber);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 2px;
+            margin-left: 16px;
+            transition: var(--transition);
+        }
+
+        .flag-link:hover {
+            color: #B7950B;
+        }
+
+        .quiz-nav {
+            padding: 14px 28px 22px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            border-top: 1px solid #E5E7EB;
+            align-items: center;
+            padding-right: 72px;
+        }
+
+        .quiz-nav .btn {
+            padding: 10px 28px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quiz-nav .btn:active {
+            transform: scale(0.96);
+        }
+
+        .quiz-nav .btn-next {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(10, 22, 40, 0.2);
+        }
+
+        .quiz-nav .btn-next:hover {
+            box-shadow: 0 4px 20px rgba(10, 22, 40, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .quiz-nav .btn-save {
+            background: var(--gold);
+            color: var(--primary);
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.25);
+        }
+
+        .quiz-nav .btn-save:hover {
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .quiz-nav .btn-submit {
+            background: var(--emerald);
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(46, 204, 113, 0.25);
+        }
+
+        .quiz-nav .btn-submit:hover {
+            box-shadow: 0 4px 20px rgba(46, 204, 113, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .quiz-nav .btn-back {
+            background: #F0F2F5;
+            color: var(--text-light);
+            margin-right: auto;
+        }
+
+        .quiz-nav .btn-back:hover {
+            background: #E5E7EB;
+        }
+
+        .quiz-footer {
+            padding: 10px 24px 14px;
+            border-top: 1px solid #E5E7EB;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            font-size: 12px;
+            color: var(--text-light);
+            flex-wrap: wrap;
+        }
+
+        .quiz-footer a {
+            color: var(--primary-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .quiz-footer a:hover {
+            color: var(--gold-dark);
+            text-decoration: underline;
+        }
+
+        /* ============================================================
+           RESULTS CONTAINER - PREMIUM
+           ============================================================ */
+        #resultsContainer {
+            display: none;
+            background: var(--card);
+            padding: 32px 36px 40px;
+            border-radius: 0 0 var(--radius) var(--radius);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        #resultsContainer .result-header {
+            text-align: center;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #E5E7EB;
+            margin-bottom: 24px;
+        }
+
+        #resultsContainer .result-header .score-circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            box-shadow: 0 8px 30px rgba(10, 22, 40, 0.2);
+            transition: var(--transition);
+        }
+
+        #resultsContainer .result-header .score-circle .score-num {
+            font-size: 38px;
+            font-weight: 800;
+        }
+
+        #resultsContainer .result-header .score-circle .score-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        #resultsContainer .result-header .score-circle.pass {
+            background: linear-gradient(135deg, #1A7A3A, var(--emerald));
+        }
+
+        #resultsContainer .result-header .score-circle.fail {
+            background: linear-gradient(135deg, #922B21, var(--ruby));
+        }
+
+        #resultsContainer .result-header h2 {
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        #resultsContainer .result-header p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        #resultsContainer .result-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
+        #resultsContainer .result-stats .stat-item {
+            background: #F8FAFC;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+            transition: var(--transition);
+        }
+
+        #resultsContainer .result-stats .stat-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        #resultsContainer .result-stats .stat-item .stat-num {
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        #resultsContainer .result-stats .stat-item .stat-label {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        #resultsContainer .result-stats .stat-item .stat-num.correct {
+            color: var(--emerald);
+        }
+
+        #resultsContainer .result-stats .stat-item .stat-num.wrong {
+            color: var(--ruby);
+        }
+
+        #resultsContainer .result-stats .stat-item .stat-num.unanswered {
+            color: var(--amber);
+        }
+
+        #resultsContainer .wrong-answers {
+            margin-top: 20px;
+        }
+
+        #resultsContainer .wrong-answers h3 {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #resultsContainer .wrong-answers h3 .count {
+            background: var(--ruby);
+            color: #fff;
+            font-size: 12px;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        #resultsContainer .wrong-answer-item {
+            background: #FDF2F2;
+            border-left: 4px solid var(--ruby);
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        #resultsContainer .wrong-answer-item:hover {
+            box-shadow: 0 2px 12px rgba(231, 76, 60, 0.08);
+        }
+
+        #resultsContainer .wrong-answer-item .wa-q {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        #resultsContainer .wrong-answer-item .wa-detail {
+            font-size: 14px;
+            color: #555;
+        }
+
+        #resultsContainer .wrong-answer-item .wa-detail .wa-correct {
+            color: var(--emerald);
+            font-weight: 600;
+        }
+
+        #resultsContainer .wrong-answer-item .wa-detail .wa-your {
+            color: var(--ruby);
+            font-weight: 600;
+        }
+
+        #resultsContainer .wrong-answer-item .wa-detail .wa-explanation {
+            color: var(--primary-light);
+            font-style: italic;
+            margin-top: 4px;
+            font-size: 13px;
+        }
+
+        .edward-message {
+            text-align: center;
+            padding: 18px 24px;
+            margin: 24px 0 16px;
+            background: linear-gradient(135deg, #FEF9E7, #FDEBD0);
+            border-radius: 12px;
+            border-left: 5px solid var(--gold);
+            box-shadow: 0 2px 12px rgba(212, 175, 55, 0.1);
+        }
+
+        .edward-message .msg-icon {
+            font-size: 30px;
+            display: block;
+        }
+
+        .edward-message .msg-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #7D6608;
+            margin-top: 4px;
+        }
+
+        .edward-message .msg-text span {
+            color: var(--ruby);
+        }
+
+        #resultsContainer .btn-back-dashboard {
+            display: block;
+            width: 100%;
+            max-width: 280px;
+            margin: 20px auto 0;
+            padding: 14px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 2px 12px rgba(10, 22, 40, 0.15);
+        }
+
+        #resultsContainer .btn-back-dashboard:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 24px rgba(10, 22, 40, 0.25);
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 768px) {
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+            .top-header {
+                padding: 10px 16px;
+                border-radius: 12px 12px 0 0;
+            }
+            .top-header .brand .brand-text .main-title {
+                font-size: 14px;
+            }
+            .timer-banner {
+                padding: 8px 16px;
+            }
+            .timer-banner .timer-text {
+                font-size: 16px;
+            }
+            #dashboard {
+                padding: 18px 14px 24px;
+            }
+            #dashboard .welcome-row .greeting h2 {
+                font-size: 20px;
+            }
+            #dashboard .stats-row {
+                flex-direction: column;
+                gap: 6px;
+                padding: 12px 16px;
+            }
+            #lectureView {
+                padding: 16px 14px 24px;
+            }
+            .quiz-body {
+                padding: 16px 14px 12px;
+                padding-right: 56px;
+            }
+            .quiz-body .question-block {
+                padding-left: 12px;
+            }
+            .quiz-body .question-block .q-text {
+                font-size: 15px;
+            }
+            .quiz-nav {
+                padding: 12px 14px 18px;
+                padding-right: 56px;
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .quiz-nav .btn-back {
+                margin-right: 0;
+            }
+            .quiz-progress-sidebar {
+                width: 40px;
+            }
+            .quiz-progress-sidebar .dot {
+                width: 14px;
+                height: 14px;
+            }
+            #loginScreen {
+                padding: 32px 20px 32px;
+            }
+            #loginScreen .uni-name {
+                font-size: 24px;
+            }
+            .lecture-bar {
+                padding: 10px 14px;
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+            .lecture-bar .bar-left .name {
+                font-size: 13px;
+            }
+            .course-card {
+                padding: 18px 20px 22px;
+            }
+            .course-card .card-title {
+                font-size: 18px;
+            }
+            #resultsContainer {
+                padding: 20px 16px 28px;
+            }
+            #resultsContainer .result-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            #resultsContainer .result-header .score-circle {
+                width: 100px;
+                height: 100px;
+            }
+            #resultsContainer .result-header .score-circle .score-num {
+                font-size: 30px;
+            }
+            .edward-message .msg-text {
+                font-size: 14px;
+            }
+            #lectureView .search-row {
+                flex-direction: column;
+            }
+            #lectureView .search-row .filter-btns {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-header .brand .logo-icon {
+                font-size: 20px;
+            }
+            .top-header .brand .brand-text .main-title {
+                font-size: 12px;
+            }
+            .top-header .brand .brand-text .sub-title {
+                font-size: 10px;
+            }
+            .timer-banner .timer-text {
+                font-size: 14px;
+            }
+            .quiz-nav .btn {
+                padding: 8px 18px;
+                font-size: 13px;
+            }
+            .options-list .opt-item {
+                font-size: 13px;
+            }
+            #dashboard .welcome-row .greeting h2 {
+                font-size: 18px;
+            }
+            .quiz-progress-sidebar {
+                width: 32px;
+            }
+            .quiz-progress-sidebar .dot {
+                width: 12px;
+                height: 12px;
+            }
+            .quiz-body {
+                padding-right: 44px;
+            }
+            .quiz-nav {
+                padding-right: 44px;
+            }
+            .course-card .card-title {
+                font-size: 16px;
+            }
+            .course-card .card-desc {
+                font-size: 12px;
+            }
+            #resultsContainer .result-stats {
+                grid-template-columns: 1fr;
+            }
+            .edward-message .msg-text {
+                font-size: 13px;
+            }
+            #loginScreen .tagline .main {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== LOADING OVERLAY ===== -->
+    <div id="loadingOverlay">
+        <div class="spinner"></div>
+        <div class="logo-text">EDWARD SAM <span>QUESTION BANK</span></div>
+        <p>Loading your questions...</p>
+        <div class="progress-bar">
+            <div class="fill" id="progressFill"></div>
+        </div>
+    </div>
+
+    <!-- ===== LOGIN SCREEN ===== -->
+    <div id="loginScreen">
+        <div class="crest">🏛️</div>
+        <div class="logo-badge">University of Ghana</div>
+        <div class="uni-name">UGRC 150 <span>&</span> 110</div>
+        <div class="sub-title">Critical Thinking • Academic Writing</div>
+        <div class="brand-divider"></div>
+        <div class="tagline">
+            <div class="main">📚 EDWARD SAM <span>PAST QUESTION BANK</span></div>
+            <span class="motto">✦ Leadership • Service • Impact ✦</span>
+        </div>
+        <div class="input-group">
+            <label for="nameInput"><span class="icon">👤</span> Full Name</label>
+            <input type="text" id="nameInput" placeholder="e.g. Edward Sam" autocomplete="off" />
+            <div class="error-msg" id="nameError"></div>
+        </div>
+        <div class="input-group">
+            <label for="indexInput"><span class="icon">🆔</span> Index Number</label>
+            <input type="text" id="indexInput" placeholder="e.g. 22483188" autocomplete="off" />
+            <div class="error-msg" id="indexError"></div>
+        </div>
+        <div class="login-options">
+            <label><input type="checkbox" checked /> Remember me</label>
+            <a href="#">Forgot ID?</a>
+        </div>
+        <button id="loginBtn">🚀 Continue to Dashboard</button>
+        <div class="login-footer-text">
+            © 2024 <span>Edward Sam</span> • All Rights Reserved
+        </div>
+    </div>
+
+    <!-- ===== APP CONTAINER ===== -->
+    <div id="appContainer">
+
+        <!-- TOP HEADER -->
+        <div class="top-header">
+            <div class="brand">
+                <div class="logo-icon">E<span>S</span></div>
+                <div class="brand-text">
+                    <div class="main-title">EDWARD SAM <span>QUESTION BANK</span></div>
+                    <div class="sub-title">UGRC 150 &bull; 110 • Critical Thinking • Academic Writing</div>
+                </div>
+            </div>
+            <div class="user-area">
+                <div class="bell">
+                    🔔
+                    <span class="badge">3</span>
+                </div>
+                <div class="avatar" id="avatarDisplay">ES</div>
+            </div>
+        </div>
+
+        <!-- TIMER BANNER -->
+        <div class="timer-banner">
+            <div class="timer-text">
+                <span class="timer-icon">⏱️</span>
+                <span id="timerDisplay">Time Remaining: 40:00</span>
+            </div>
+            <span class="timer-toggle" id="timerToggle">▲ Hide Time Remaining ▲</span>
+        </div>
+
+        <!-- ===== DASHBOARD ===== -->
+        <div id="dashboard">
+            <div class="welcome-row">
+                <div class="greeting">
+                    <span class="wave">👋</span>
+                    <h2>Welcome, <span id="welcomeName">Edward</span></h2>
+                </div>
+                <span class="index-badge" id="indexBadge">📘 22483188</span>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="stats-row" id="statsRow">
+                <div class="stat-item">📊 Total Questions: <span class="num" id="totalQuestions">0</span></div>
+                <div class="stat-item">✅ Completed: <span class="num green" id="completedSets">0</span> sets</div>
+                <div class="stat-item">📈 Success Rate: <span class="num gold" id="successRate">0%</span></div>
+            </div>
+
+            <!-- Motivational Quote -->
+            <div class="motivational" id="quoteDisplay">
+                "The function of education is to teach one to think intensively and to think critically."
+                <span class="author">— Martin Luther King Jr.</span>
+            </div>
+
+            <div class="course-grid">
+                <!-- Critical Thinking Card -->
+                <div class="course-card ct" data-course="ct">
+                    <div class="card-icon">🧠</div>
+                    <div class="card-title">Critical Thinking</div>
+                    <div class="card-desc">Analyze, evaluate, and improve your reasoning skills</div>
+                    <div class="card-footer">
+                        <span class="card-badge">Click to start</span>
+                        <span class="card-lectures">9 Lectures • 5 Sets each</span>
+                    </div>
+                    <div class="card-progress" id="ctProgress">⏳ 0% complete</div>
+                </div>
+                <!-- Academic Writing Card -->
+                <div class="course-card aw" data-course="aw">
+                    <div class="card-icon">📝</div>
+                    <div class="card-title">Academic Writing</div>
+                    <div class="card-desc">Master the art of scholarly writing and research</div>
+                    <div class="card-footer">
+                        <span class="card-badge">Click to start</span>
+                        <span class="card-lectures">10 Lectures • 5 Sets each</span>
+                    </div>
+                    <div class="card-progress" id="awProgress">⏳ 0% complete</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== LECTURE VIEW ===== -->
+        <div id="lectureView">
+            <div class="back-row">
+                <div class="left">
+                    <h3 id="lectureViewTitle">📖 Select a Lecture</h3>
+                    <span class="course-badge" id="courseBadge">Critical Thinking</span>
+                </div>
+                <button class="back-btn" id="backToDashboardBtn">← Back to Dashboard</button>
+            </div>
+            <div class="search-row">
+                <input type="text" id="searchInput" placeholder="🔍 Search lectures..." />
+                <div class="filter-btns">
+                    <button class="active" data-filter="all">All</button>
+                    <button data-filter="completed">✅ Completed</button>
+                    <button data-filter="incomplete">⏳ In Progress</button>
+                </div>
+            </div>
+            <div class="lecture-bar-list" id="lectureBarList"></div>
+        </div>
+
+        <!-- ===== QUIZ CONTAINER ===== -->
+        <div id="quizContainer">
+            <div class="quiz-header">
+                <div class="exam-title" id="quizExamTitle">Critical Thinking — Lecture 1</div>
+                <div class="section-label" id="quizSectionLabel">Set 1 of 5 • 50 Questions</div>
+                <div class="question-bar">
+                    <span class="q-left" id="quizQuestionCounter">Question 1 of 45</span>
+                    <span class="q-right" id="quizPointsDisplay">1 Point</span>
+                </div>
+            </div>
+            <div class="quiz-body">
+                <div class="quiz-progress-sidebar" id="progressSidebar"></div>
+                <div class="question-block">
+                    <div class="q-meta" id="qMeta">
+                        <span class="tag" id="qTypeTag">MCQ</span>
+                        <span id="qSourceTag">📖 NEW</span>
+                    </div>
+                    <div class="q-text" id="quizQuestionText">Loading question...</div>
+                    <div class="options-list" id="quizOptionsContainer"></div>
+                    <div>
+                        <span class="reset-link" id="resetSelectionLink">↻ Reset Selection</span>
+                        <span class="flag-link" id="flagLink">🚩 Flag for Review</span>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-nav">
+                <button class="btn btn-back" id="quizBackBtn">← Back to Lectures</button>
+                <button class="btn btn-next" id="quizNextBtn">Next →</button>
+                <button class="btn btn-save" id="quizSaveBtn">💾 Save</button>
+                <button class="btn btn-submit" id="quizSubmitBtn">📤 Submit Assignment</button>
+            </div>
+            <div class="quiz-footer">
+                <a href="#">🏠 Gateway</a>
+                <a href="#">📚 Sakai Resources</a>
+                <a href="#">⚖️ University Terms</a>
+                <a href="#">❓ Help</a>
+            </div>
+        </div>
+
+        <!-- ===== RESULTS CONTAINER ===== -->
+        <div id="resultsContainer">
+            <div class="result-header">
+                <div class="score-circle" id="scoreCircle">
+                    <span class="score-num" id="scoreNum">0</span>
+                    <span class="score-label">/ <span id="scoreTotal">50</span></span>
+                </div>
+                <h2 id="resultTitle">📊 Assessment Results</h2>
+                <p id="resultSubtitle">Review your performance below</p>
+            </div>
+            <div class="result-stats">
+                <div class="stat-item">
+                    <div class="stat-num correct" id="statCorrect">0</div>
+                    <div class="stat-label">✅ Correct</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num wrong" id="statWrong">0</div>
+                    <div class="stat-label">❌ Wrong</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num unanswered" id="statUnanswered">0</div>
+                    <div class="stat-label">⏳ Unanswered</div>
+                </div>
+            </div>
+            <div class="wrong-answers">
+                <h3>📋 Detailed Review <span class="count" id="wrongCount">0</span></h3>
+                <div id="wrongAnswersList"></div>
+            </div>
+            <div class="edward-message">
+                <span class="msg-icon">🌟</span>
+                <div class="msg-text">Edward Sam wishes you all the best in your upcoming test! <span>💪🏽📚</span></div>
+            </div>
+            <button class="btn-back-dashboard" id="resultsBackBtn">← Back to Dashboard</button>
+        </div>
+
+    </div>
+
+    <script>
+        // ============================================================
+        // COMPLETE JAVASCRIPT - PREMIUM EDITION
+        // ============================================================
+        (function() {
+            'use strict';
+
+            // ============================================================
+            // APPS SCRIPT DEPLOYMENT URLS
+            // ============================================================
+            const CT_API_URL = 'https://script.google.com/macros/s/AKfycbwWDZ6UFbT_KVWyx4p9j2jcQshOKjOVRQycPccH5uYpOnr1NND4nLHrFGXzrBq1NZVqYg/exec';
+            const AW_API_URL = 'https://script.google.com/macros/s/AKfycbzhigoaX7O57jBinqVyoPzg9-9jNnFMmh3j4pn0O1003_2ziBU2VFMs4QDUjEx8VoQsgg/exec';
+
+            // ============================================================
+            // LECTURE CONFIGURATIONS
+            // ============================================================
+
+            const CT_LECTURE_META = {
+                'L1': { title: 'Sentence-Shaped Thought', isMaster: false },
+                'L2': { title: 'Definitions', isMaster: false },
+                'L3': { title: 'Contrasting Types of Discourse', isMaster: false },
+                'L4': { title: 'Six Senses of Law', isMaster: false },
+                'L5': { title: 'Deduction vs Induction', isMaster: false },
+                'L6': { title: 'Inductive Reasoning', isMaster: false },
+                'L7': { title: 'Sampling & Analogies', isMaster: false },
+                'L8': { title: 'Causal Reasoning', isMaster: false },
+                'L9': { title: 'Informal Fallacies', isMaster: false },
+                'L10': { title: '⭐ Master Set', isMaster: true }
+            };
+            const CT_LECTURES = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8', 'L9', 'L10'];
+
+            const AW_LECTURE_META = {
+                'AW1': { title: 'General Introduction to Academic Writing', isMaster: false },
+                'AW2': { title: 'Reading for Information: Skills and Strategies', isMaster: false },
+                'AW3': { title: 'Structure of the Essay & Structure of Introductions', isMaster: false },
+                'AW4': { title: 'Main Body and Concluding Paragraphs', isMaster: false },
+                'AW5': { title: 'Principles of Paragraphing', isMaster: false },
+                'AW6': { title: 'Essay Writing I - The Writing Process', isMaster: false },
+                'AW7': { title: 'Academic Style (Academic Vocabulary & Sentence Variety)', isMaster: false },
+                'AW8': { title: 'Language Issues (Tense and Punctuation)', isMaster: false },
+                'AW9': { title: 'Common Errors (Sentence Fragments and Run-On Sentences)', isMaster: false },
+                'AW10': { title: 'General Introduction to Referencing Skills & Avoiding Plagiarism', isMaster: false },
+                'AW11': { title: '⭐ Master Set', isMaster: true }
+            };
+            const AW_LECTURES = ['AW1', 'AW2', 'AW3', 'AW4', 'AW5', 'AW6', 'AW7', 'AW8', 'AW9', 'AW10', 'AW11'];
+
+            // ============================================================
+            // DATA STORE
+            // ============================================================
+            const QUESTION_BANK = {};
+            let dataLoaded = false;
+            let totalAPIs = 2;
+            let loadedAPIs = 0;
+            let totalQuestionsCount = 0;
+            let completedSets = 0;
+
+            // ============================================================
+            // DOM REFS
+            // ============================================================
+            const loginScreen = document.getElementById('loginScreen');
+            const appContainer = document.getElementById('appContainer');
+            const nameInput = document.getElementById('nameInput');
+            const indexInput = document.getElementById('indexInput');
+            const nameError = document.getElementById('nameError');
+            const indexError = document.getElementById('indexError');
+            const loginBtn = document.getElementById('loginBtn');
+
+            const dashboard = document.getElementById('dashboard');
+            const lectureView = document.getElementById('lectureView');
+            const quizContainer = document.getElementById('quizContainer');
+            const resultsContainer = document.getElementById('resultsContainer');
+
+            const welcomeName = document.getElementById('welcomeName');
+            const indexBadge = document.getElementById('indexBadge');
+            const avatarDisplay = document.getElementById('avatarDisplay');
+            const totalQuestionsEl = document.getElementById('totalQuestions');
+            const completedSetsEl = document.getElementById('completedSets');
+            const successRateEl = document.getElementById('successRate');
+            const quoteDisplay = document.getElementById('quoteDisplay');
+
+            const timerDisplay = document.getElementById('timerDisplay');
+            const timerToggle = document.getElementById('timerToggle');
+
+            const lectureBarList = document.getElementById('lectureBarList');
+            const backToDashboardBtn = document.getElementById('backToDashboardBtn');
+            const lectureViewTitle = document.getElementById('lectureViewTitle');
+            const courseBadge = document.getElementById('courseBadge');
+            const searchInput = document.getElementById('searchInput');
+
+            const quizExamTitle = document.getElementById('quizExamTitle');
+            const quizSectionLabel = document.getElementById('quizSectionLabel');
+            const quizQuestionCounter = document.getElementById('quizQuestionCounter');
+            const quizPointsDisplay = document.getElementById('quizPointsDisplay');
+            const quizQuestionText = document.getElementById('quizQuestionText');
+            const quizOptionsContainer = document.getElementById('quizOptionsContainer');
+            const resetSelectionLink = document.getElementById('resetSelectionLink');
+            const flagLink = document.getElementById('flagLink');
+            const qTypeTag = document.getElementById('qTypeTag');
+            const qSourceTag = document.getElementById('qSourceTag');
+            const quizBackBtn = document.getElementById('quizBackBtn');
+            const quizNextBtn = document.getElementById('quizNextBtn');
+            const quizSaveBtn = document.getElementById('quizSaveBtn');
+            const quizSubmitBtn = document.getElementById('quizSubmitBtn');
+            const progressSidebar = document.getElementById('progressSidebar');
+
+            const resultsBackBtn = document.getElementById('resultsBackBtn');
+            const scoreNum = document.getElementById('scoreNum');
+            const scoreTotal = document.getElementById('scoreTotal');
+            const scoreCircle = document.getElementById('scoreCircle');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultSubtitle = document.getElementById('resultSubtitle');
+            const statCorrect = document.getElementById('statCorrect');
+            const statWrong = document.getElementById('statWrong');
+            const statUnanswered = document.getElementById('statUnanswered');
+            const wrongAnswersList = document.getElementById('wrongAnswersList');
+            const wrongCount = document.getElementById('wrongCount');
+
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const progressFill = document.getElementById('progressFill');
+
+            // ============================================================
+            // APP STATE
+            // ============================================================
+            const state = {
+                userName: '',
+                indexNumber: '',
+                currentCourse: null,
+                currentLecture: null,
+                currentSet: 1,
+                currentQuestionIndex: 0,
+                currentQuestions: [],
+                answers: {},
+                flaggedQuestions: new Set(),
+                timerInterval: null,
+                timeSeconds: 2400,
+                timerVisible: true,
+                isSubmitted: false,
+                results: null,
+                completedSets: 0,
+                totalAttempted: 0,
+                totalCorrect: 0
+            };
+
+            // ============================================================
+            // QUOTES ARRAY
+            // ============================================================
+            const quotes = [
+                { text: "The function of education is to teach one to think intensively and to think critically.", author: "Martin Luther King Jr." },
+                { text: "Education is the most powerful weapon which you can use to change the world.", author: "Nelson Mandela" },
+                { text: "The mind is not a vessel to be filled, but a fire to be kindled.", author: "Plutarch" },
+                { text: "Critical thinking is the key to creative problem solving in business.", author: "Richard Branson" },
+                { text: "Writing is thinking on paper.", author: "William Zinsser" },
+                { text: "The beautiful thing about learning is that nobody can take it away from you.", author: "B.B. King" },
+                { text: "Leadership is not about being in charge. It's about taking care of those in your charge.", author: "Simon Sinek" },
+                { text: "Service to others is the rent you pay for your room here on earth.", author: "Muhammad Ali" }
+            ];
+
+            let currentQuoteIndex = 0;
+
+            // ============================================================
+            // SMART MARKING FUNCTIONS
+            // ============================================================
+
+            function normalizeText(text) {
+                return text.toLowerCase().trim().replace(/\s+/g, ' ');
+            }
+
+            function extractKeywords(text) {
+                const stopWords = ['the', 'a', 'an', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had',
+                    'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'must', 'shall', 'can',
+                    'of', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'in', 'as', 'that', 'this', 'these', 'those',
+                    'which', 'what', 'who', 'whom', 'whose', 'when', 'where', 'why', 'how', 'then', 'than', 'so', 'too',
+                    'very', 'just', 'only', 'but', 'not', 'nor', 'or', 'yet', 'so'
+                ];
+                const words = text.toLowerCase().replace(/[^a-z0-9\s']/g, '').split(/\s+/);
+                return words.filter(w => w.length > 2 && !stopWords.includes(w));
+            }
+
+            function keywordMatch(studentAnswer, correctAnswer) {
+                if (!studentAnswer || !correctAnswer) return false;
+
+                const studentNorm = normalizeText(studentAnswer);
+                const correctNorm = normalizeText(correctAnswer);
+
+                if (studentNorm === correctNorm) return true;
+                if (studentNorm.includes(correctNorm) || correctNorm.includes(studentNorm)) return true;
+
+                const studentKeywords = extractKeywords(studentAnswer);
+                const correctKeywords = extractKeywords(correctAnswer);
+
+                if (studentKeywords.length === 0 || correctKeywords.length === 0) return false;
+
+                let matchCount = 0;
+                for (const kw of correctKeywords) {
+                    if (studentKeywords.some(sk => sk.includes(kw) || kw.includes(sk))) {
+                        matchCount++;
+                    }
+                }
+
+                return (matchCount / correctKeywords.length) >= 0.6;
+            }
+
+            // ============================================================
+            // MARKING ENGINE
+            // ============================================================
+
+            function markAssessment(questions, answers) {
+                let correct = 0;
+                let wrong = 0;
+                let unanswered = 0;
+                const wrongDetails = [];
+
+                questions.forEach((q, idx) => {
+                    const userAnswer = answers[q.number] || '';
+                    const isAnswered = userAnswer && userAnswer.length > 0;
+
+                    let isCorrect = false;
+                    let correctAnswerDisplay = q.correct || 'N/A';
+
+                    if (q.type === 'MCQ') {
+                        isCorrect = isAnswered && userAnswer === q.correct;
+                    } else if (q.type === 'FILL' || q.type === 'SHORT') {
+                        isCorrect = isAnswered && keywordMatch(userAnswer, q.correct);
+                    }
+
+                    if (!isAnswered) {
+                        unanswered++;
+                    } else if (isCorrect) {
+                        correct++;
+                    } else {
+                        wrong++;
+                        wrongDetails.push({
+                            number: q.number,
+                            question: q.question,
+                            type: q.type,
+                            yourAnswer: userAnswer || '(not answered)',
+                            correctAnswer: correctAnswerDisplay,
+                            explanation: q.explanation || 'No explanation available.'
+                        });
+                    }
+                });
+
+                const total = questions.length;
+                const score = Math.round((correct / total) * 100);
+
+                // Update global stats
+                state.totalAttempted += (correct + wrong);
+                state.totalCorrect += correct;
+                state.completedSets += 1;
+
+                return {
+                    correct,
+                    wrong,
+                    unanswered,
+                    total,
+                    score,
+                    scorePercent: score,
+                    wrongDetails,
+                    passed: score >= 50
+                };
+            }
+
+            // ============================================================
+            // DISPLAY RESULTS
+            // ============================================================
+
+            function displayResults(results) {
+                quizContainer.style.display = 'none';
+                resultsContainer.style.display = 'block';
+
+                scoreNum.textContent = results.correct;
+                scoreTotal.textContent = results.total;
+                scoreCircle.className = 'score-circle';
+                if (results.passed) {
+                    scoreCircle.classList.add('pass');
+                } else {
+                    scoreCircle.classList.add('fail');
+                }
+
+                statCorrect.textContent = results.correct;
+                statWrong.textContent = results.wrong;
+                statUnanswered.textContent = results.unanswered;
+                wrongCount.textContent = results.wrong;
+
+                if (results.passed) {
+                    resultTitle.textContent = '🎉 Congratulations! You Passed!';
+                    resultSubtitle.textContent = `You scored ${results.scorePercent}% (${results.correct}/${results.total})`;
+                } else {
+                    resultTitle.textContent = '📚 Keep Practicing!';
+                    resultSubtitle.textContent = `You scored ${results.scorePercent}% (${results.correct}/${results.total}). Review the questions below.`;
+                }
+
+                wrongAnswersList.innerHTML = '';
+                if (results.wrongDetails.length === 0) {
+                    wrongAnswersList.innerHTML =
+                        '<p style="color:#2ECC71;font-size:16px;text-align:center;padding:20px;">🎯 All answers correct! Excellent work!</p>';
+                } else {
+                    results.wrongDetails.forEach((item, idx) => {
+                        const div = document.createElement('div');
+                        div.className = 'wrong-answer-item';
+                        div.innerHTML = `
+                            <div class="wa-q">Q${item.number}. ${item.question}</div>
+                            <div class="wa-detail">
+                                <span class="wa-your">Your Answer: ${item.yourAnswer}</span><br>
+                                <span class="wa-correct">Correct Answer: ${item.correctAnswer}</span><br>
+                                ${item.explanation ? `<span class="wa-explanation">💡 ${item.explanation}</span>` : ''}
+                            </div>
+                        `;
+                        wrongAnswersList.appendChild(div);
+                    });
+                }
+
+                // Update dashboard stats
+                updateStats();
+
+                if (state.timerInterval) {
+                    clearInterval(state.timerInterval);
+                    state.timerInterval = null;
+                }
+            }
+
+            // ============================================================
+            // UPDATE STATS
+            // ============================================================
+
+            function updateStats() {
+                const rate = state.totalAttempted > 0 ? Math.round((state.totalCorrect / state.totalAttempted) * 100) : 0;
+                totalQuestionsEl.textContent = state.totalAttempted;
+                completedSetsEl.textContent = state.completedSets;
+                successRateEl.textContent = rate + '%';
+
+                // Update course progress
+                const ctProgress = document.getElementById('ctProgress');
+                const awProgress = document.getElementById('awProgress');
+                // Simplified progress - you can make this more sophisticated
+                ctProgress.textContent = '📈 ' + Math.min(rate + 10, 100) + '% complete';
+                awProgress.textContent = '📈 ' + Math.min(rate, 100) + '% complete';
+            }
+
+            // ============================================================
+            // SUBMIT ASSESSMENT
+            // ============================================================
+
+            function submitAssessment() {
+                if (state.isSubmitted) return;
+
+                const total = state.currentQuestions.length;
+                const answered = Object.keys(state.answers).filter(k => state.answers[k] && state.answers[k].length > 0)
+                .length;
+
+                if (answered < total) {
+                    if (!confirm(`You have only answered ${answered} out of ${total} questions. Are you sure you want to submit?`)) {
+                        return;
+                    }
+                } else {
+                    if (!confirm('You have answered all questions. Submit your assessment?')) {
+                        return;
+                    }
+                }
+
+                state.isSubmitted = true;
+                const results = markAssessment(state.currentQuestions, state.answers);
+                state.results = results;
+                displayResults(results);
+            }
+
+            // ============================================================
+            // LOAD DATA FROM APPS SCRIPT
+            // ============================================================
+
+            function loadQuestions() {
+                loadingOverlay.classList.add('active');
+                loadedAPIs = 0;
+                updateProgress();
+
+                fetch(CT_API_URL)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.error) {
+                            processData(data, 'ct');
+                        }
+                        loadedAPIs++;
+                        updateProgress();
+                        checkAllLoaded();
+                    })
+                    .catch(err => {
+                        console.error('CT API Error:', err);
+                        loadedAPIs++;
+                        updateProgress();
+                        checkAllLoaded();
+                    });
+
+                fetch(AW_API_URL)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.error) {
+                            processData(data, 'aw');
+                        }
+                        loadedAPIs++;
+                        updateProgress();
+                        checkAllLoaded();
+                    })
+                    .catch(err => {
+                        console.error('AW API Error:', err);
+                        loadedAPIs++;
+                        updateProgress();
+                        checkAllLoaded();
+                    });
+            }
+
+            function processData(data, course) {
+                Object.keys(data).forEach(key => {
+                    const questions = data[key];
+                    if (questions && questions.length > 0) {
+                        if (!QUESTION_BANK[key]) QUESTION_BANK[key] = {};
+                        questions.forEach(q => {
+                            const setNum = q.set || 1;
+                            if (!QUESTION_BANK[key][setNum]) QUESTION_BANK[key][setNum] = [];
+                            QUESTION_BANK[key][setNum].push(q);
+                        });
+                        Object.keys(QUESTION_BANK[key]).forEach(sk => {
+                            QUESTION_BANK[key][sk].sort((a, b) => (a.number || 0) - (b.number || 0));
+                        });
+                        console.log(`✅ Loaded ${questions.length} questions for ${key}`);
+                    }
+                });
+            }
+
+            function updateProgress() {
+                const pct = Math.round((loadedAPIs / totalAPIs) * 100);
+                progressFill.style.width = pct + '%';
+            }
+
+            function checkAllLoaded() {
+                if (loadedAPIs >= totalAPIs) {
+                    dataLoaded = true;
+                    loadingOverlay.classList.remove('active');
+                    console.log('✅ All questions loaded successfully!');
+                    // Count total questions
+                    let count = 0;
+                    Object.keys(QUESTION_BANK).forEach(lk => {
+                        Object.keys(QUESTION_BANK[lk]).forEach(sk => {
+                            count += QUESTION_BANK[lk][sk].length;
+                        });
+                    });
+                    totalQuestionsCount = count;
+                    totalQuestionsEl.textContent = count;
+                    if (state.currentCourse) {
+                        renderLectureBars(state.currentCourse);
+                    }
+                    // Rotate quotes
+                    rotateQuote();
+                    setInterval(rotateQuote, 8000);
+                }
+            }
+
+            // ============================================================
+            // QUOTE ROTATOR
+            // ============================================================
+
+            function rotateQuote() {
+                const q = quotes[currentQuoteIndex % quotes.length];
+                quoteDisplay.innerHTML = `"${q.text}" <span class="author">— ${q.author}</span>`;
+                currentQuoteIndex++;
+            }
+
+            // ============================================================
+            // RENDER LECTURE BARS
+            // ============================================================
+
+            function renderLectureBars(course) {
+                const isCT = course === 'ct';
+                const lectureKeys = isCT ? CT_LECTURES : AW_LECTURES;
+                const meta = isCT ? CT_LECTURE_META : AW_LECTURE_META;
+                const courseName = isCT ? 'Critical Thinking' : 'Academic Writing';
+
+                lectureBarList.innerHTML = '';
+                let filteredKeys = lectureKeys;
+
+                // Apply search filter
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                if (searchTerm) {
+                    filteredKeys = lectureKeys.filter(lk => {
+                        const info = meta[lk];
+                        return info && info.title.toLowerCase().includes(searchTerm);
+                    });
+                }
+
+                filteredKeys.forEach((lk, idx) => {
+                    const info = meta[lk];
+                    if (!info) return;
+                    const hasQuestions = QUESTION_BANK[lk] && Object.keys(QUESTION_BANK[lk]).length > 0;
+                    const statusClass = hasQuestions ? 'loaded' : (dataLoaded ? 'failed' : 'loading');
+                    const statusText = hasQuestions ? '✅ Loaded' : (dataLoaded ? '❌ No data' : '⏳ Loading...');
+
+                    const bar = document.createElement('div');
+                    bar.className = 'lecture-bar';
+                    bar.dataset.lecture = lk;
+                    bar.dataset.status = hasQuestions ? 'loaded' : 'failed';
+                    bar.innerHTML = `
+                        <div class="bar-left">
+                            <span class="num">${idx + 1}</span>
+                            <span class="name">${info.title} ${info.isMaster ? '<span class="badge-master">⭐ MASTER</span>' : ''}</span>
+                            ${info.isMaster ? '' : '<span class="badge-complete">📖 5 Sets</span>'}
+                        </div>
+                        <div class="bar-right">
+                            <span class="status ${statusClass}">${statusText}</span>
+                            <span class="time-est">~${hasQuestions ? (Object.keys(QUESTION_BANK[lk]).length * 15) : 0} min</span>
+                        </div>
+                    `;
+                    bar.addEventListener('click', () => {
+                        if (hasQuestions) {
+                            startQuiz(lk, 1);
+                        } else {
+                            alert('⏳ Questions for this lecture are still loading or unavailable.');
+                        }
+                    });
+                    lectureBarList.appendChild(bar);
+                });
+
+                lectureViewTitle.textContent = `📖 Select a Lecture — ${courseName}`;
+                courseBadge.textContent = courseName;
+                courseBadge.className = 'course-badge ' + (isCT ? 'ct' : 'aw');
+            }
+
+            // ============================================================
+            // SEARCH & FILTER
+            // ============================================================
+
+            searchInput.addEventListener('input', function() {
+                if (state.currentCourse) {
+                    renderLectureBars(state.currentCourse);
+                }
+            });
+
+            document.querySelectorAll('.filter-btns button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    // Simple filter - just re-render with search
+                    if (state.currentCourse) {
+                        renderLectureBars(state.currentCourse);
+                    }
+                });
+            });
+
+            // ============================================================
+            // LOGIN
+            // ============================================================
+
+            function validateLogin() {
+                const name = nameInput.value.trim();
+                const index = indexInput.value.trim();
+                let valid = true;
+
+                if (!name || /[0-9]/.test(name)) {
+                    nameError.textContent = '⚠️ Please enter a valid name (letters only).';
+                    valid = false;
+                } else {
+                    nameError.textContent = '';
+                }
+
+                if (!index || /[a-zA-Z]/.test(index)) {
+                    indexError.textContent = '⚠️ Please enter a valid index number (digits only).';
+                    valid = false;
+                } else {
+                    indexError.textContent = '';
+                }
+
+                if (valid) {
+                    state.userName = name;
+                    state.indexNumber = index;
+                    showDashboard();
+                }
+            }
+
+            loginBtn.addEventListener('click', validateLogin);
+            nameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') validateLogin(); });
+            indexInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') validateLogin(); });
+
+            // ============================================================
+            // NAVIGATION
+            // ============================================================
+
+            function showDashboard() {
+                loginScreen.style.display = 'none';
+                appContainer.style.display = 'block';
+                dashboard.style.display = 'block';
+                lectureView.style.display = 'none';
+                quizContainer.style.display = 'none';
+                resultsContainer.style.display = 'none';
+
+                welcomeName.textContent = state.userName;
+                indexBadge.textContent = `📘 ${state.indexNumber}`;
+                avatarDisplay.textContent = state.userName.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+
+                updateStats();
+                startTimer();
+            }
+
+            function showLectureView(course) {
+                dashboard.style.display = 'none';
+                lectureView.style.display = 'block';
+                quizContainer.style.display = 'none';
+                resultsContainer.style.display = 'none';
+
+                state.currentCourse = course;
+                searchInput.value = '';
+                renderLectureBars(course);
+            }
+
+            // ============================================================
+            // START QUIZ
+            // ============================================================
+
+            function startQuiz(lectureKey, setNumber) {
+                state.currentLecture = lectureKey;
+                state.currentSet = setNumber;
+                state.currentQuestionIndex = 0;
+                state.isSubmitted = false;
+                state.results = null;
+                state.answers = {};
+                state.flaggedQuestions = new Set();
+
+                const questions = getQuestionsForSet(lectureKey, setNumber);
+                if (!questions || questions.length === 0) {
+                    alert('⚠️ No questions found for this lecture/set.');
+                    return;
+                }
+                state.currentQuestions = questions;
+
+                dashboard.style.display = 'none';
+                lectureView.style.display = 'none';
+                quizContainer.style.display = 'block';
+                resultsContainer.style.display = 'none';
+
+                const isCT = state.currentCourse === 'ct';
+                const meta = isCT ? CT_LECTURE_META : AW_LECTURE_META;
+                const info = meta[lectureKey];
+                const courseName = isCT ? 'Critical Thinking' : 'Academic Writing';
+
+                quizExamTitle.textContent = `${courseName} — ${info ? info.title : lectureKey}`;
+                quizSectionLabel.textContent = `Set ${setNumber} of 5 • ${state.currentQuestions.length} Questions`;
+
+                resetTimer();
+
+                renderQuestion();
+                renderProgressDots();
+            }
+
+            function getQuestionsForSet(lectureKey, setNumber) {
+                if (QUESTION_BANK[lectureKey] && QUESTION_BANK[lectureKey][setNumber]) {
+                    return QUESTION_BANK[lectureKey][setNumber];
+                }
+                const sets = Object.keys(QUESTION_BANK[lectureKey] || {});
+                if (sets.length > 0) {
+                    return QUESTION_BANK[lectureKey][sets[0]];
+                }
+                return null;
+            }
+
+            // ============================================================
+            // RENDER QUESTION
+            // ============================================================
+
+            function renderQuestion() {
+                const qs = state.currentQuestions;
+                const idx = state.currentQuestionIndex;
+                if (!qs || qs.length === 0 || idx >= qs.length) return;
+
+                const q = qs[idx];
+                const total = qs.length;
+                const qNum = idx + 1;
+
+                quizQuestionCounter.textContent = `Question ${qNum} of ${total}`;
+                quizPointsDisplay.textContent = q.type === 'MCQ' ? '1 Point' : '2 Points';
+                quizQuestionText.textContent = q.question || 'No question text.';
+
+                qTypeTag.textContent = q.type || 'MCQ';
+                qSourceTag.textContent = q.source ? `📖 ${q.source}` : '📖 NEW';
+
+                quizOptionsContainer.innerHTML = '';
+
+                if (q.type === 'MCQ') {
+                    const letters = ['A', 'B', 'C', 'D'];
+                    const opts = q.options || [];
+                    opts.forEach((opt, oi) => {
+                        if (!opt) return;
+                        const div = document.createElement('div');
+                        div.className = 'opt-item';
+                        const radio = document.createElement('input');
+                        radio.type = 'radio';
+                        radio.name = 'questionOption';
+                        radio.value = letters[oi];
+                        radio.id = `opt_${oi}`;
+                        if (state.answers[q.number] === letters[oi]) {
+                            radio.checked = true;
+                        }
+                        radio.addEventListener('change', () => {
+                            if (radio.checked) {
+                                state.answers[q.number] = letters[oi];
+                                renderProgressDots();
+                            }
+                        });
+                        const label = document.createElement('label');
+                        label.htmlFor = `opt_${oi}`;
+                        label.innerHTML = `<span class="opt-letter">${letters[oi]}.</span> ${opt}`;
+                        div.appendChild(radio);
+                        div.appendChild(label);
+                        quizOptionsContainer.appendChild(div);
+                    });
+                    resetSelectionLink.style.display = 'inline-block';
+                } else if (q.type === 'FILL') {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.placeholder = 'Type your answer...';
+                    input.style.cssText =
+                        'width:100%;padding:10px 14px;border:2px solid #E5E7EB;border-radius:10px;font-size:15px;margin-top:6px;background:#FAFBFC;transition:border 0.2s;';
+                    input.addEventListener('focus', function() { this.style.borderColor = '#1A3A6B'; });
+                    input.addEventListener('blur', function() { this.style.borderColor = '#E5E7EB'; });
+                    if (state.answers[q.number]) {
+                        input.value = state.answers[q.number];
+                    }
+                    input.addEventListener('input', () => {
+                        state.answers[q.number] = input.value.trim();
+                        renderProgressDots();
+                    });
+                    quizOptionsContainer.appendChild(input);
+                    resetSelectionLink.style.display = 'none';
+                } else if (q.type === 'SHORT') {
+                    const textarea = document.createElement('textarea');
+                    textarea.placeholder = 'Write your answer here...';
+                    textarea.style.cssText =
+                        'width:100%;padding:10px 14px;border:2px solid #E5E7EB;border-radius:10px;font-size:15px;min-height:80px;font-family:inherit;background:#FAFBFC;transition:border 0.2s;';
+                    textarea.addEventListener('focus', function() { this.style.borderColor = '#1A3A6B'; });
+                    textarea.addEventListener('blur', function() { this.style.borderColor = '#E5E7EB'; });
+                    if (state.answers[q.number]) {
+                        textarea.value = state.answers[q.number];
+                    }
+                    textarea.addEventListener('input', () => {
+                        state.answers[q.number] = textarea.value.trim();
+                        renderProgressDots();
+                    });
+                    quizOptionsContainer.appendChild(textarea);
+                    resetSelectionLink.style.display = 'none';
+                }
+
+                // Flag status
+                if (state.flaggedQuestions.has(q.number)) {
+                    flagLink.textContent = '🏳️ Unflag';
+                    flagLink.style.color = '#27ae60';
+                } else {
+                    flagLink.textContent = '🚩 Flag for Review';
+                    flagLink.style.color = '#F39C12';
+                }
+
+                renderProgressDots();
+            }
+
+            // ============================================================
+            // PROGRESS DOTS
+            // ============================================================
+
+            function renderProgressDots() {
+                const qs = state.currentQuestions;
+                if (!qs) return;
+
+                progressSidebar.innerHTML = '';
+                qs.forEach((q, idx) => {
+                    const isCurrent = idx === state.currentQuestionIndex;
+                    const isAnswered = state.answers[q.number] && state.answers[q.number].length > 0;
+                    const isFlagged = state.flaggedQuestions.has(q.number);
+
+                    const dot = document.createElement('div');
+                    dot.className = 'dot';
+                    if (isCurrent) dot.classList.add('current');
+                    if (isAnswered) dot.classList.add('answered');
+                    if (isFlagged) dot.classList.add('flagged');
+
+                    dot.title = `Q${q.number}${isAnswered ? ' ✅ Answered' : ' ❌ Not answered'}${isFlagged ? ' 🚩 Flagged' : ''}`;
+                    dot.addEventListener('click', () => {
+                        state.currentQuestionIndex = idx;
+                        renderQuestion();
+                    });
+
+                    progressSidebar.appendChild(dot);
+                });
+            }
+
+            // ============================================================
+            // FLAG TOGGLE
+            // ============================================================
+
+            flagLink.addEventListener('click', function() {
+                const q = state.currentQuestions[state.currentQuestionIndex];
+                if (!q) return;
+                if (state.flaggedQuestions.has(q.number)) {
+                    state.flaggedQuestions.delete(q.number);
+                    this.textContent = '🚩 Flag for Review';
+                    this.style.color = '#F39C12';
+                } else {
+                    state.flaggedQuestions.add(q.number);
+                    this.textContent = '🏳️ Unflag';
+                    this.style.color = '#27ae60';
+                }
+                renderProgressDots();
+            });
+
+            // ============================================================
+            // TIMER
+            // ============================================================
+
+            function startTimer() {
+                if (state.timerInterval) {
+                    clearInterval(state.timerInterval);
+                }
+                state.timeSeconds = 2400;
+                updateTimerDisplay();
+                state.timerInterval = setInterval(() => {
+                    state.timeSeconds--;
+                    updateTimerDisplay();
+
+                    if (state.timeSeconds <= 0) {
+                        clearInterval(state.timerInterval);
+                        state.timerInterval = null;
+                        if (!state.isSubmitted && quizContainer.style.display !== 'none') {
+                            alert('⏰ Time is up! Your assessment will be submitted automatically.');
+                            submitAssessment();
+                        }
+                    }
+                }, 1000);
+            }
+
+            function resetTimer() {
+                if (state.timerInterval) {
+                    clearInterval(state.timerInterval);
+                    state.timerInterval = null;
+                }
+                state.timeSeconds = 2400;
+                updateTimerDisplay();
+                state.timerInterval = setInterval(() => {
+                    state.timeSeconds--;
+                    updateTimerDisplay();
+
+                    if (state.timeSeconds <= 0) {
+                        clearInterval(state.timerInterval);
+                        state.timerInterval = null;
+                        if (!state.isSubmitted && quizContainer.style.display !== 'none') {
+                            alert('⏰ Time is up! Your assessment will be submitted automatically.');
+                            submitAssessment();
+                        }
+                    }
+                }, 1000);
+            }
+
+            function updateTimerDisplay() {
+                const mins = Math.floor(state.timeSeconds / 60);
+                const secs = state.timeSeconds % 60;
+                const timeStr = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+                if (state.timeSeconds < 300) {
+                    timerDisplay.innerHTML = `⏱️ <span class="timer-warning">⚠️ Time Remaining: ${timeStr}</span>`;
+                } else {
+                    timerDisplay.innerHTML = `⏱️ Time Remaining: ${timeStr}`;
+                }
+            }
+
+            timerToggle.addEventListener('click', function() {
+                state.timerVisible = !state.timerVisible;
+                const banner = document.querySelector('.timer-banner');
+                if (state.timerVisible) {
+                    banner.style.display = 'flex';
+                    timerToggle.textContent = '▲ Hide Time Remaining ▲';
+                } else {
+                    banner.style.display = 'none';
+                    timerToggle.textContent = '▼ Show Time Remaining ▼';
+                }
+            });
+
+            // ============================================================
+            // NAVIGATION BUTTONS
+            // ============================================================
+
+            quizNextBtn.addEventListener('click', function() {
+                if (state.isSubmitted) return;
+                const qs = state.currentQuestions;
+                const idx = state.currentQuestionIndex;
+                if (!qs) return;
+                const q = qs[idx];
+
+                if (q.type === 'MCQ' && !state.answers[q.number]) {
+                    alert('⚠️ Please select an answer before proceeding.');
+                    return;
+                }
+
+                if (idx < qs.length - 1) {
+                    state.currentQuestionIndex++;
+                    renderQuestion();
+                } else {
+                    alert('📌 You have reached the end of the set. Click "Submit Assignment" to see your results.');
+                }
+            });
+
+            quizBackBtn.addEventListener('click', function() {
+                if (state.isSubmitted) {
+                    if (confirm('Return to lecture list?')) {
+                        showLectureView(state.currentCourse);
+                    }
+                    return;
+                }
+                if (confirm('Return to lecture list? Your progress will be saved.')) {
+                    showLectureView(state.currentCourse);
+                }
+            });
+
+            quizSaveBtn.addEventListener('click', function() {
+                const total = state.currentQuestions.length;
+                const answered = Object.keys(state.answers).filter(k => state.answers[k] && state.answers[k].length > 0)
+                    .length;
+                alert(`💾 Answers saved! (${answered}/${total} questions answered)`);
+            });
+
+            quizSubmitBtn.addEventListener('click', function() {
+                if (state.isSubmitted) return;
+                submitAssessment();
+            });
+
+            resetSelectionLink.addEventListener('click', function() {
+                const q = state.currentQuestions[state.currentQuestionIndex];
+                if (q && q.type === 'MCQ') {
+                    const radios = document.querySelectorAll('input[name="questionOption"]');
+                    radios.forEach(r => r.checked = false);
+                    delete state.answers[q.number];
+                    renderProgressDots();
+                }
+            });
+
+            resultsBackBtn.addEventListener('click', function() {
+                showDashboard();
+            });
+
+            // ============================================================
+            // COURSE CARD CLICKS
+            // ============================================================
+
+            document.querySelectorAll('.course-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const course = this.dataset.course;
+                    showLectureView(course);
+                });
+            });
+
+            backToDashboardBtn.addEventListener('click', function() {
+                showDashboard();
+            });
+
+            // ============================================================
+            // KEYBOARD SHORTCUTS
+            // ============================================================
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight' || e.key === 'Enter') {
+                    if (quizContainer.style.display !== 'none' && !state.isSubmitted) {
+                        quizNextBtn.click();
+                    }
+                }
+                if (e.key === 'ArrowLeft') {
+                    // Could add previous question functionality
+                }
+                if (e.key === 'f' || e.key === 'F') {
+                    if (quizContainer.style.display !== 'none' && !state.isSubmitted) {
+                        flagLink.click();
+                    }
+                }
+            });
+
+            // ============================================================
+            // INIT
+            // ============================================================
+
+            loginScreen.style.display = 'block';
+            appContainer.style.display = 'none';
+
+            // Load quotes
+            rotateQuote();
+            setInterval(rotateQuote, 8000);
+
+            // Load questions
+            loadQuestions();
+
+            console.log('✅ Edward Sam UGRC 150 & 110 Premium Quiz App loaded.');
+            console.log('📚 Critical Thinking: 10 lectures configured');
+            console.log('📚 Academic Writing: 11 lectures configured');
+            console.log('💡 Leadership • Service • Impact');
+
+        })();
+    </script>
+
+</body>
+</html>
